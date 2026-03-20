@@ -385,7 +385,6 @@ export default function MacroShotGeneratorPage() {
       } : macroTarget === 'nose' ? {
         pore_detail: true,
         nose_contour_shadows: true,
-        skin_texture: true,
         fine_hairs: true,
         bone_structure: true,
         bridge_curve: true

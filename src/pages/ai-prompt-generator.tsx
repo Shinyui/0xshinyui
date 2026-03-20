@@ -440,7 +440,17 @@ skinRenderingDetail / makeupApplication / qualityModifiers: 需強調 8K、無�
       }
     }
 
-    const jsonData = {
+    const jsonData: {
+      _meta: {
+        prompt_version: string;
+        generated_at: string;
+        field_count: number;
+      };
+      identity?: Partial<IdentityFields>;
+      style?: Partial<StyleFields>;
+      personality?: Partial<PersonalityFields>;
+      technicalSpecs?: Partial<TechnicalFields>;
+    } = {
       _meta: {
         prompt_version: 'v2.1',
         generated_at: new Date().toISOString(),
@@ -475,25 +485,25 @@ skinRenderingDetail / makeupApplication / qualityModifiers: 需強調 8K、無�
     ];
 
     identityFields.forEach(field => {
-      if (filtered[field]) jsonData.identity[field] = filtered[field];
+      if (filtered[field]) jsonData.identity![field] = filtered[field];
     });
 
     styleFields.forEach(field => {
-      if (filtered[field]) jsonData.style[field] = filtered[field];
+      if (filtered[field]) jsonData.style![field] = filtered[field];
     });
 
     personalityFields.forEach(field => {
-      if (filtered[field]) jsonData.personality[field] = filtered[field];
+      if (filtered[field]) jsonData.personality![field] = filtered[field];
     });
 
     technicalFields.forEach(field => {
-      if (filtered[field]) jsonData.technicalSpecs[field] = filtered[field];
+      if (filtered[field]) jsonData.technicalSpecs![field] = filtered[field];
     });
 
-    if (Object.keys(jsonData.identity).length === 0) delete jsonData.identity;
-    if (Object.keys(jsonData.style).length === 0) delete jsonData.style;
-    if (Object.keys(jsonData.personality).length === 0) delete jsonData.personality;
-    if (Object.keys(jsonData.technicalSpecs).length === 0) delete jsonData.technicalSpecs;
+    if (Object.keys(jsonData.identity!).length === 0) delete jsonData.identity;
+    if (Object.keys(jsonData.style!).length === 0) delete jsonData.style;
+    if (Object.keys(jsonData.personality!).length === 0) delete jsonData.personality;
+    if (Object.keys(jsonData.technicalSpecs!).length === 0) delete jsonData.technicalSpecs;
 
     return JSON.stringify(jsonData, null, 2);
   };

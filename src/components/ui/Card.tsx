@@ -1,10 +1,11 @@
-import { ReactNode } from 'react';
+import { ReactNode, CSSProperties } from 'react';
 
 interface CardProps {
   children: ReactNode;
   hoverable?: boolean;
   padding?: 'none' | 'sm' | 'md' | 'lg';
   className?: string;
+  style?: CSSProperties;
 }
 
 export default function Card({
@@ -12,6 +13,7 @@ export default function Card({
   hoverable = false,
   padding = 'md',
   className = '',
+  style = {},
 }: CardProps) {
   const paddingClasses = {
     none: '',
@@ -32,6 +34,7 @@ export default function Card({
         backgroundColor: 'var(--card-background)',
         borderColor: 'var(--border-color)',
         boxShadow: '0 4px 6px var(--shadow-color)',
+        ...style,
       }}
       onMouseEnter={
         hoverable
