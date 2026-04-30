@@ -1,15 +1,17 @@
-import { getPostBySlug, getPostSlugs } from '@/lib/hygraph';
+import { getPostBySlug, getSlugs } from '@/lib/posts';
 import Layout from '@/components/layout/Layout';
 import TableOfContents from '@/components/post/TableOfContents';
-import { ArticleJsonLd } from '@/components/seo/JsonLd';
+import { ArticleJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 import { siteConfig } from '@/lib/siteConfig';
-import { remark } from 'remark';
+import { getMDXComponents } from '@/components/mdx';
+import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
-import remarkRehype from 'remark-rehype';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeStringify from 'rehype-stringify';
 import toc from 'markdown-toc';
+import Image from 'next/image';
+import { bunnyOptimize } from '@/lib/bunny';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 
 type TocItem = { slug: string; content: string; lvl: number };
@@ -20,11 +22,14 @@ type PostProps = {
     title: string;
     date: string;
     excerpt: string;
-    contentHtml: string;
+    contentType: string;
+    mdxSource: MDXRemoteSerializeResult;
     toc: TocItem[];
     coverImage: string | null;
   };
 };
+
+const mdxComponents = getMDXComponents();
 
 export default function Post({ post }: PostProps) {
   const postUrl = `${siteConfig.siteUrl}/posts/${post.slug}`;
@@ -50,20 +55,30 @@ export default function Post({ post }: PostProps) {
         author="0xShinyui"
         image={post.coverImage || undefined}
       />
+      <BreadcrumbJsonLd
+        items={[
+          { name: '首頁', url: siteConfig.siteUrl },
+          { name: post.contentType, url: `${siteConfig.siteUrl}/category/${encodeURIComponent(post.contentType)}` },
+          { name: post.title, url: postUrl },
+        ]}
+      />
       {/* 封面 + 基本資料 */}
       <div className="mx-auto mb-12">
         {post.coverImage && (
           <div
-            className="w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border"
+            className="w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border relative"
             style={{
               borderColor: 'var(--border-color)',
               boxShadow: '0 8px 25px var(--shadow-color)',
             }}
           >
-            <img
-              src={post.coverImage}
+            <Image
+              src={bunnyOptimize(post.coverImage, { width: 1200, quality: 80 })}
               alt={post.title}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              fill
+              className="object-cover transition-transform duration-300 hover:scale-105"
+              unoptimized
+              priority
             />
           </div>
         )}
@@ -136,8 +151,6 @@ export default function Post({ post }: PostProps) {
               [&_td]:border [&_td]:px-3 [&_td]:py-2
               [&_td]:border-[var(--border-color)]
               [&_hr]:my-10 [&_hr]:border-t [&_hr]:border-[var(--border-color)]
-              [&_img]:rounded [&_img]:shadow-md [&_img]:my-4
-              hover:[&_img]:scale-105 transition-transform duration-300 ease-in-out
 
               [id]:target:before:content-[''] [id]:target:before:block
               [id]:target:before:h-20 [id]:target:before:-mt-20
@@ -148,10 +161,9 @@ export default function Post({ post }: PostProps) {
               color: 'var(--text-secondary)',
               boxShadow: '0 4px 6px var(--shadow-color)',
             }}
-            dangerouslySetInnerHTML={{
-              __html: post.contentHtml,
-            }}
-          />
+          >
+            <MDXRemote {...post.mdxSource} components={mdxComponents} />
+          </article>
         </div>
       </div>
     </Layout>
@@ -159,34 +171,36 @@ export default function Post({ post }: PostProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getPostSlugs();
-  const paths = posts.map((p) => ({ params: { slug: p.slug } }));
+  const slugs = getSlugs();
+  const paths = slugs.map((slug) => ({ params: { slug } }));
 
   return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const postData = await getPostBySlug(params!.slug as string);
+    const slug = params!.slug as string;
+    const postData = getPostBySlug(slug);
 
-    const processed = await remark()
-      .use(remarkGfm)
-      .use(remarkRehype)
-      .use(rehypeSlug)
-      .use(rehypeAutolinkHeadings)
-      .use(rehypeStringify)
-      .process(postData.content);
+    const mdxSource = await serialize(postData.content, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+      },
+      parseFrontmatter: false,
+    });
 
     const tocData = toc(postData.content).json as TocItem[];
 
     return {
       props: {
         post: {
-          slug: params!.slug as string,
+          slug,
           title: postData.title,
           date: postData.date,
           excerpt: postData.excerpt,
-          contentHtml: processed.toString(),
+          contentType: postData.contentType,
+          mdxSource,
           coverImage: postData.coverImage,
           toc: tocData,
         },

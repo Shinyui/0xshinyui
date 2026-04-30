@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { getAllPosts } from '@/lib/hygraph';
+import { getAllPosts } from '@/lib/posts';
 import { siteConfig } from '@/lib/siteConfig';
 
 type SitemapEntry = {

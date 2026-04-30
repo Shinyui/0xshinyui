@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/next';
 import Header from './Header';
 import Footer from './Footer';
 import SEO, { SEOProps } from '@/components/seo/SEO';
-import { WebSiteJsonLd } from '@/components/seo/JsonLd';
+import { WebSiteJsonLd, OrganizationJsonLd } from '@/components/seo/JsonLd';
 
 interface LayoutProps extends SEOProps {
   children: ReactNode;
@@ -27,6 +27,7 @@ export default function Layout({
         article={article}
       />
       <WebSiteJsonLd />
+      <OrganizationJsonLd />
 
       <div
         className="min-h-screen flex flex-col"

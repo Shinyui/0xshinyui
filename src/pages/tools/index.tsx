@@ -23,40 +23,14 @@ const ToolsPage = () => {
       features: ['TOTP 標準', '本地運算', '即時更新', '安全可靠']
     },
     {
-      id: 'ai-prompt',
-      title: 'AI 人像提示詞生成器',
-      description: '根據標準化字段生成高質量的圖像提示詞，支援 JSON 和自然語言格式輸出。',
-      path: '/ai-prompt-generator',
-      icon: '🎨',
-      color: '#f0b90b',
-      features: ['可折疊分類', 'JSON + 自然語言', '一鍵複製', '本地運算']
-    },
-    {
-      id: 'multi-angle-reference',
-      title: '多角度參考表生成器',
-      description: '根據人物 identity JSON 生成 9 角度角色參考表提示詞，支援近景/中景/全身三種拍攝類型。',
-      path: '/multi-angle-reference-sheet',
-      icon: '📐',
-      color: '#f0b90b',
-      features: ['從 AI 生成器匯入', '三種拍攝類型', '固定 9 角度', 'JSON 格式輸出']
-    },
-    {
-      id: 'macro-shot',
-      title: 'Macro 特寫生成器',
-      description: '根據人物 identity JSON 生成專業微距特寫提示詞，支援眼部和皮膚紋理兩種模式，使用 100mm macro lens 和 f/2.8 光圈參數。',
-      path: '/macro-shot',
-      icon: '🔍',
-      color: '#f0b90b',
-      features: ['從 AI 生成器匯入', '兩種 Macro 目標', '三種拍攝類型', '固定微距參數']
-    },
-    {
-      id: 'scene-generator',
-      title: '場景提示詞生成器',
-      description: '根據人物 identity JSON 生成專業場景提示詞，支援 10 種預設場景和 3 種拍攝距離。',
-      path: '/scene-generator',
-      icon: '🎬',
-      color: '#f0b90b',
-      features: ['從 AI 生成器匯入', '10 種預設場景', '3 種拍攝距離', '場景標籤']
+      id: 'kol',
+      title: 'KOL 嚴選',
+      description: '精心挑選的 KOL 名單與分析平台，幫助你快速找到適合合作的網紅創作者。',
+      path: 'https://kol.0xshinyui.xyz',
+      icon: '⭐',
+      color: '#8b5cf6',
+      features: ['KOL 名單', '數據分析', '分類篩選', '外部網站'],
+      external: true
     }
   ];
 

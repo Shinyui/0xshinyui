@@ -36,7 +36,10 @@ export default function SEO({
       {/* Basic Meta Tags */}
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
+      <meta name="theme-color" content="#0b0e11" />
       <link rel="canonical" href={fullUrl} />
+      <link rel="alternate" type="application/atom+xml" title={siteConfig.siteName} href={`${siteConfig.siteUrl}/feed.xml`} />
+      <link rel="manifest" href="/manifest.json" />
 
       {/* Open Graph */}
       <meta property="og:title" content={pageTitle} />

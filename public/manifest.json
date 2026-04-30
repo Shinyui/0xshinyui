@@ -1,0 +1,21 @@
+{
+  "name": "0xShinyui 技術部落格",
+  "short_name": "0xShinyui",
+  "description": "分享產品管理、技術開發、運營經驗的部落格",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0e11",
+  "theme_color": "#0b0e11",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

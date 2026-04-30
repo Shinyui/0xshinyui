@@ -1,7 +1,9 @@
 import Layout from '@/components/layout/Layout';
 import PostCard from '@/components/post/PostCard';
 import CategoryFilter from '@/components/category/CategoryFilter';
-import { getAllPosts } from '@/lib/hygraph';
+import { getAllPosts } from '@/lib/posts';
+import { BreadcrumbJsonLd } from '@/components/seo/JsonLd';
+import { siteConfig } from '@/lib/siteConfig';
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getCategoryDisplayName, sortCategories } from '@/utils/category';
@@ -48,6 +50,12 @@ export default function CategoryPage({
       description={`瀏覽 ${categoryName} 分類下的文章`}
       canonical={`/category/${category}`}
     >
+      <BreadcrumbJsonLd
+        items={[
+          { name: '首頁', url: siteConfig.siteUrl },
+          { name: categoryName, url: `${siteConfig.siteUrl}/category/${encodeURIComponent(category)}` },
+        ]}
+      />
       <h1
         className="text-2xl sm:text-3xl font-bold mb-4"
         style={{ color: 'var(--text-primary)' }}

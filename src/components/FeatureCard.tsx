@@ -11,6 +11,7 @@ interface FeatureCardProps {
   features: string[];
   buttonText?: string;
   type?: 'tool' | 'game';
+  external?: boolean;
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
@@ -22,12 +23,12 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   color,
   features,
   buttonText = '立即使用',
-  type = 'tool'
+  type = 'tool',
+  external = false
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <Link href={path}>
+  const card = (
       <div
         className="group relative overflow-hidden rounded-2xl transition-all duration-500 transform hover:scale-105 cursor-pointer"
         style={{
@@ -134,7 +135,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         </div>
 
         {/* 邊框光效 */}
-        <div 
+        <div
           className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
             background: `linear-gradient(90deg, transparent, ${color}30, transparent)`,
@@ -143,8 +144,17 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
           }}
         />
       </div>
-    </Link>
-  );
+    );
+
+  if (external) {
+    return (
+      <a href={path} target="_blank" rel="noopener noreferrer">
+        {card}
+      </a>
+    );
+  }
+
+  return <Link href={path}>{card}</Link>;
 };
 
 export default FeatureCard;

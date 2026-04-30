@@ -1,7 +1,7 @@
 import Layout from '@/components/layout/Layout';
 import PostCard from '@/components/post/PostCard';
 import CategoryFilter from '@/components/category/CategoryFilter';
-import { getAllPosts } from '@/lib/hygraph';
+import { getAllPosts } from '@/lib/posts';
 import { sortCategories } from '@/utils/category';
 
 type Post = {
