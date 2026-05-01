@@ -196,6 +196,118 @@ export const shopCategories: ProductCategory[] = [
           '批量購買優惠',
         ],
       },
+      {
+        id: 'google-account',
+        title: 'Google 帳號',
+        description:
+          '提供已註冊的 Google 帳號，適合空投任務註冊、YouTube 互動、Gmail 驗證等場景。',
+        price: '聯絡報價',
+        icon: '🔍',
+        color: '#ea4335',
+        features: [
+          '已註冊帳號',
+          'Gmail 可用',
+          'YouTube 互動',
+          '批量購買優惠',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'source-code-scripts',
+    title: '服務源碼＆腳本',
+    subtitle: '完整專案源碼與自動化腳本，買斷制授權',
+    products: [
+      {
+        id: 'matrix-automation-cli',
+        title: 'Matrix Automation CLI',
+        description:
+          'Instagram & Threads 用戶活動模擬工具，基於 ADB 多設備自動化，採用馬爾可夫鏈行為演算法模擬真實用戶瀏覽行為。',
+        price: '聯絡報價',
+        icon: '📲',
+        color: '#e1306c',
+        features: [
+          '多設備並發處理',
+          '馬爾可夫鏈行為模擬',
+          'Instagram/Threads 支援',
+          '可配置模擬步數',
+        ],
+      },
+      {
+        id: 'telegram-dm-bot',
+        title: 'Telegram DM Bot',
+        description:
+          'Telegram 雙向消息轉發機器人，實現客戶與客服之間的消息橋樑，支援所有訊息類型轉發。',
+        price: '聯絡報價',
+        icon: '📨',
+        color: '#2aabee',
+        features: [
+          '雙向消息轉發',
+          '全訊息類型支援',
+          '訊息映射系統',
+          'HTTP API 管理',
+        ],
+      },
+      {
+        id: 'telegram-broadcast-bot',
+        title: 'Telegram Broadcast Bot',
+        description:
+          'Telegram 訂閱廣播系統，支援用戶統計、批量廣播、活躍度追蹤，採用 Long Polling + Runner 高併發架構。',
+        price: '聯絡報價',
+        icon: '📢',
+        color: '#0ea5e9',
+        features: [
+          '批量廣播推送',
+          '用戶統計分析',
+          '25 Worker 高併發',
+          '批量寫入優化',
+        ],
+      },
+      {
+        id: 'telegram-clouddrive-bot',
+        title: 'Telegram CloudDrive Bot',
+        description:
+          'Telegram 雲端檔案存儲系統，支援上傳、分享碼生成、分頁管理，採用三層快取與 Controller-Service-Repository 架構。',
+        price: '聯絡報價',
+        icon: '☁️',
+        color: '#8b5cf6',
+        features: [
+          '分享碼快速分享',
+          '三層快取架構',
+          '媒體群組智能合併',
+          '分頁檔案管理',
+        ],
+      },
+      {
+        id: 'peek-platform',
+        title: 'Peek 區塊鏈內容平台',
+        description:
+          '全端內容創作者平台，整合 TRON 區塊鏈認證、PPV 付費內容、訂閱制服務與積分經濟系統，支援 HLS 多畫質影片轉碼。',
+        price: '聯絡報價',
+        icon: '💎',
+        color: '#f59e0b',
+        features: [
+          'TRON 錢包認證',
+          'PPV 付費 & 訂閱',
+          'HLS 影片轉碼',
+          '積分經濟系統',
+        ],
+      },
+      {
+        id: 'telegram-livestream',
+        title: 'Telegram 直播平台',
+        description:
+          '基於 Telegram 的直播打賞平台，微服務架構含 5 個服務，整合 MTProto 自動化管理、禮物系統與完整金流。',
+        price: '聯絡報價',
+        icon: '🎬',
+        color: '#ef4444',
+        features: [
+          '微服務 5 大模組',
+          'MTProto 自動管理',
+          '禮物打賞系統',
+          '完整結算金流',
+        ],
+      },
     ],
   },
 ];
