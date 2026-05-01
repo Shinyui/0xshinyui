@@ -99,6 +99,21 @@ export const shopCategories: ProductCategory[] = [
           '多錢包輪替部署',
         ],
       },
+      {
+        id: 'arc-testnet',
+        title: 'ARC Testnet Bot',
+        description:
+          'ARC 測試網自動化機器人，支援多錢包批量執行。自動完成領水、GM 簽到、合約部署、借貸池操作（存入/借出/歸還）、AMM 流動性與兌換、NFT 鑿造等任務，自動檢查前置條件與冷卻時間。',
+        price: '聯絡報價',
+        icon: '🤖',
+        color: '#10b981',
+        features: [
+          '多錢包批量執行',
+          '領水 & GM 簽到',
+          '借貸池 & AMM 操作',
+          '合約部署 & NFT 鑿造',
+        ],
+      },
     ],
   },
   {
