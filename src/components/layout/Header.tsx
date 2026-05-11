@@ -16,6 +16,7 @@ const defaultNavItems: NavItem[] = [
   { label: '首頁', href: '/' },
   { label: '工具總覽', href: '/tools' },
   { label: '商店', href: '/shop' },
+  { label: '名片', href: '/card' },
   { label: '關於我', href: '/about' },
 ];
 
