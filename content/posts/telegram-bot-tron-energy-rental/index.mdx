@@ -19,7 +19,7 @@ coverImage: "https://0xshinyui.b-cdn.net/placeholders/dev-cover.svg"
 
 但中間牽扯到一些實務抉擇、鏈上邏輯與數據單位處理，還是值得整理記錄下來
 
-## Before：地址監聽——事件觸發的起點，也是第一個 Trade-off
+## 地址監聽——事件觸發的起點，也是第一個 Trade-off
 
 這類能量租賃機器人，第一個需求一定是：
 
@@ -50,7 +50,7 @@ coverImage: "https://0xshinyui.b-cdn.net/placeholders/dev-cover.svg"
 >
 > 既然都要付錢，與其自己去扛那些基礎設施的維運地獄，不如乾脆交給三方的成熟服務處理。把工程資源集中在「收到事件之後要做什麼」，才是這個產品真正的核心邏輯
 
-## Core：波場質押 + 能量授權，整套能量的核心結構
+## 波場質押 + 能量授權，整套能量的核心結構
 
 ### 2.1 波場鏈質押：選擇能量，還是帶寬？
 
@@ -127,7 +127,7 @@ const result = await tronWeb.trx.sendRawTransaction(signedTx)
 - **RPC 網路穩定**（鏈上操作，延遲就是成本）
 - **記得 stake 結束後會有「冷卻期」**，部分資產會被鎖定幾天才能退回。這是機制的內建限制，不是 bug
 
-## Trade-off：這不是產品，這是對鏈的運作邏輯做拆解
+## 這不是產品，這是對鏈的運作邏輯做拆解
 
 這個能量租賃機器人，其實不是什麼正式產品
 
