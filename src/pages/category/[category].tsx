@@ -1,6 +1,8 @@
+import { Fragment } from 'react';
 import Layout from '@/components/layout/Layout';
 import PostCard from '@/components/post/PostCard';
 import CategoryFilter from '@/components/category/CategoryFilter';
+import AdSlot from '@/components/ads/AdSlot';
 import { getAllPosts } from '@/lib/posts';
 import { BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 import { siteConfig } from '@/lib/siteConfig';
@@ -56,16 +58,30 @@ export default function CategoryPage({
           { name: categoryName, url: `${siteConfig.siteUrl}/category/${encodeURIComponent(category)}` },
         ]}
       />
-      <h1
-        className="text-2xl sm:text-3xl font-bold mb-4"
-        style={{ color: 'var(--text-primary)' }}
+      <section
+        className="mb-8 rounded-lg border p-6"
+        style={{
+          background:
+            'linear-gradient(135deg, rgba(0, 240, 255, 0.095), rgba(168, 255, 79, 0.035)), var(--surface)',
+          borderColor: 'var(--border-color)',
+        }}
       >
-        {categoryName} 文章
-      </h1>
-
-      <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>
-        共 {posts.length} 篇文章
-      </p>
+        <p
+          className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+          style={{ color: 'var(--accent-cyan)' }}
+        >
+          Category
+        </p>
+        <h1
+          className="text-2xl font-bold sm:text-4xl"
+          style={{ color: 'var(--text-primary)' }}
+        >
+          {categoryName} 文章
+        </h1>
+        <p className="mt-3" style={{ color: 'var(--text-secondary)' }}>
+          共 {posts.length} 篇文章
+        </p>
+      </section>
 
       <CategoryFilter
         categories={allCategories}
@@ -79,8 +95,16 @@ export default function CategoryPage({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+          {posts.map((post, index) => (
+            <Fragment key={post.slug}>
+              {index === 3 && (
+                <AdSlot
+                  className="sm:col-span-2 lg:col-span-3"
+                  placement={`${categoryName} category banner`}
+                />
+              )}
+              <PostCard post={post} />
+            </Fragment>
           ))}
         </div>
       )}

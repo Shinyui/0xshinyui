@@ -19,12 +19,27 @@ export default function IpPage({ ip, userAgent, timestamp }: IpPageProps) {
       canonical="/ip"
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1
-          className="text-2xl sm:text-3xl font-bold mb-6"
-          style={{ color: 'var(--text-primary)' }}
+        <section
+          className="mb-6 rounded-lg border p-6"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+            borderColor: 'var(--border-color)',
+          }}
         >
-          訪問者資訊
-        </h1>
+          <p
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-cyan)' }}
+          >
+            Network
+          </p>
+          <h1
+            className="text-2xl font-bold sm:text-4xl"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            訪問者資訊
+          </h1>
+        </section>
 
         <div className="space-y-6">
           <InfoCard

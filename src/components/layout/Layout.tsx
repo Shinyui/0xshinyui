@@ -30,15 +30,14 @@ export default function Layout({
       <OrganizationJsonLd />
 
       <div
-        className="min-h-screen flex flex-col"
+        className="site-shell min-h-screen flex flex-col"
         style={{
-          backgroundColor: 'var(--background)',
           color: 'var(--text-primary)',
         }}
       >
         <Header />
 
-        <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-grow">
+        <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 flex-grow">
           {children}
           <Analytics />
         </main>

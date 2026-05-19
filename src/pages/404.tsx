@@ -23,7 +23,7 @@ export default function NotFound({ posts }: NotFoundProps) {
       <div className="flex flex-col items-center justify-center py-20">
         <h1
           className="text-8xl font-bold mb-4"
-          style={{ color: 'var(--accent-gold)' }}
+          style={{ color: 'var(--accent-cyan)' }}
         >
           404
         </h1>
@@ -37,7 +37,7 @@ export default function NotFound({ posts }: NotFoundProps) {
           href="/"
           className="px-6 py-3 rounded-lg font-medium transition-colors duration-300"
           style={{
-            backgroundColor: 'var(--accent-gold)',
+            backgroundColor: 'var(--accent-cyan)',
             color: '#0b0e11',
           }}
         >

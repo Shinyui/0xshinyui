@@ -24,19 +24,21 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <div
-      className="rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-4 border hover:scale-105"
+      className="group flex h-full flex-col rounded-lg border p-4 transition-all duration-300"
       style={{
-        backgroundColor: 'var(--card-background)',
+        background:
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--card-background)',
         borderColor: 'var(--border-color)',
-        boxShadow: '0 4px 6px var(--shadow-color)',
+        boxShadow: '0 14px 38px var(--shadow-color)',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'var(--accent-gold)';
-        e.currentTarget.style.boxShadow = '0 8px 25px var(--shadow-color)';
+        e.currentTarget.style.borderColor = 'var(--accent-cyan)';
+        e.currentTarget.style.boxShadow =
+          '0 18px 48px var(--shadow-color), 0 0 24px var(--glow-cyan)';
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = 'var(--border-color)';
-        e.currentTarget.style.boxShadow = '0 4px 6px var(--shadow-color)';
+        e.currentTarget.style.boxShadow = '0 14px 38px var(--shadow-color)';
       }}
     >
       {showCover && post.coverImage?.url && (
@@ -53,10 +55,10 @@ export default function PostCard({
 
       <Link href={`/posts/${post.slug}`} className="block">
         <h2
-          className="text-lg font-semibold mb-1 transition-colors duration-300"
+          className="mb-2 text-lg font-semibold leading-snug transition-colors duration-300"
           style={{ color: 'var(--text-primary)' }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--accent-gold)';
+            e.currentTarget.style.color = 'var(--accent-cyan)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.color = 'var(--text-primary)';
@@ -68,7 +70,7 @@ export default function PostCard({
 
       {showExcerpt && (
         <p
-          className="text-sm line-clamp-3"
+          className="text-sm leading-relaxed line-clamp-3"
           style={{ color: 'var(--text-secondary)' }}
         >
           {post.excerpt}

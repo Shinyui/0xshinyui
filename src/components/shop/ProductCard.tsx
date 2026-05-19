@@ -11,21 +11,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div
-      className="group relative overflow-hidden rounded-xl transition-all duration-300 flex flex-col"
+      className="group relative flex flex-col overflow-hidden rounded-lg border transition-all duration-300"
       style={{
-        backgroundColor: 'var(--card-background)',
-        border: `1px solid var(--border-color)`,
+        background:
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--card-background)',
+        borderColor: isHovered ? color : 'var(--border-color)',
         boxShadow: isHovered
-          ? `0 20px 40px -12px ${color}30`
-          : '0 2px 8px rgba(0, 0, 0, 0.15)',
+          ? `0 22px 50px -18px ${color}80`
+          : '0 14px 38px var(--shadow-color)',
         transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Top color block with icon — product image area */}
       <div
-        className="relative h-40 flex items-center justify-center overflow-hidden"
+        className="relative flex h-36 items-center justify-center overflow-hidden"
         style={{
           background: `linear-gradient(135deg, ${color}25, ${color}08)`,
         }}
@@ -36,7 +36,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
           {icon}
         </span>
-        {/* Subtle diagonal stripe pattern */}
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -51,9 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
       </div>
 
-      {/* Content */}
       <div className="flex flex-col flex-grow p-5">
-        {/* Title */}
         <h3
           className="text-lg font-bold mb-2 line-clamp-1"
           style={{ color: 'var(--text-primary)' }}
@@ -61,20 +58,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {title}
         </h3>
 
-        {/* Description — max 2 lines */}
         <p
           className="text-sm leading-relaxed mb-4 line-clamp-2"
-          style={{ color: 'var(--text-muted)' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           {description}
         </p>
 
-        {/* Feature tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {features.map((feature, index) => (
             <span
               key={index}
-              className="px-2.5 py-1 rounded-full text-xs font-medium"
+              className="rounded px-2.5 py-1 text-xs font-medium"
               style={{
                 backgroundColor: `${color}12`,
                 color: color,
@@ -86,16 +81,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           ))}
         </div>
 
-        {/* Spacer to push bottom section down */}
         <div className="flex-grow" />
 
-        {/* Separator */}
         <div
           className="my-3 h-px"
           style={{ backgroundColor: 'var(--border-color)' }}
         />
 
-        {/* Price + CTA */}
         <div className="flex items-center justify-between">
           <span
             className="text-lg font-bold"
@@ -109,7 +101,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 inline-flex items-center gap-1.5"
             style={{
-              backgroundColor: 'var(--accent-gold)',
+              backgroundColor: 'var(--accent-cyan)',
               color: '#0b0e11',
             }}
           >

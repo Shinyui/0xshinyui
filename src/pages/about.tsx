@@ -9,12 +9,27 @@ export default function Profile() {
       canonical="/about"
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1
-          className="text-2xl sm:text-3xl font-bold mb-6"
-          style={{ color: 'var(--text-primary)' }}
+        <section
+          className="mb-6 rounded-lg border p-6"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+            borderColor: 'var(--border-color)',
+          }}
         >
-          個人介紹
-        </h1>
+          <p
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-cyan)' }}
+          >
+            About
+          </p>
+          <h1
+            className="text-2xl font-bold sm:text-4xl"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            個人介紹
+          </h1>
+        </section>
 
         <Card padding="lg">
           <section
@@ -22,7 +37,7 @@ export default function Profile() {
             style={{ color: 'var(--text-secondary)' }}
           >
             <p className="transition-colors duration-300 hover:text-white">
-              <span style={{ color: 'var(--accent-gold)', fontWeight: 'bold' }}>
+              <span style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
                 0xShinyui
               </span>
               ，一個喜歡把點子變成產品、也願意為使用者多走幾步的 PM
@@ -30,14 +45,14 @@ export default function Profile() {
             <p className="transition-colors duration-300 hover:text-white">
               這幾年，我從寫文案、投廣告、跑數據，一路走到協作工程與設計，把產品從
               0 拉到 1，還順手學了{' '}
-              <span style={{ color: 'var(--accent-gold)' }}>React</span> 和{' '}
-              <span style={{ color: 'var(--accent-gold)' }}>Express</span>
+              <span style={{ color: 'var(--accent-cyan)' }}>React</span> 和{' '}
+              <span style={{ color: 'var(--accent-cyan)' }}>Express</span>
               ，把自己搞成半個工程師。
               做過線上課程平台、私域會員系統、金流模塊，也踩過不少坑。
             </p>
             <p className="transition-colors duration-300 hover:text-white">
               我相信「
-              <span style={{ color: 'var(--accent-gold)' }}>
+              <span style={{ color: 'var(--accent-cyan)' }}>
                 產品不是寫完就好
               </span>
               」，而是能不能真的解決用戶的問題。

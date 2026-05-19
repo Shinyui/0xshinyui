@@ -1,18 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  /* Binance-inspired color scheme */
-  --background: #0b0e11;
-  --foreground: #eaecef;
-  --card-background: #1e2329;
-  --border-color: #2b3139;
-  --accent-gold: #f0b90b;
-  --accent-gold-dark: #d19e00;
-  --text-primary: #eaecef;
-  --text-secondary: #848e9c;
-  --text-muted: #5e6673;
-  --hover-background: #2b3139;
-  --shadow-color: rgba(0, 0, 0, 0.3);
+  /* Bitget-inspired dark trading interface */
+  --background: #050808;
+  --foreground: #f2f7f8;
+  --surface: #081012;
+  --surface-raised: #0d171a;
+  --card-background: #101b1e;
+  --border-color: #1f3338;
+  --border-strong: #2d5057;
+  --accent-cyan: #00f0ff;
+  --accent-teal: #00b8c4;
+  --accent-lime: #a8ff4f;
+  --accent-warning: #f5b744;
+  --accent-danger: #ff5c5c;
+  --accent-gold: var(--accent-cyan);
+  --accent-gold-dark: var(--accent-teal);
+  --text-primary: #f2f7f8;
+  --text-secondary: #9fb4b8;
+  --text-muted: #687d82;
+  --hover-background: #142326;
+  --shadow-color: rgba(0, 0, 0, 0.42);
+  --glow-cyan: rgba(0, 240, 255, 0.2);
+  --radius-card: 8px;
 }
 
 @theme inline {
@@ -20,8 +30,8 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card-background);
   --color-border: var(--border-color);
-  --color-accent: var(--accent-gold);
-  --color-accent-dark: var(--accent-gold-dark);
+  --color-accent: var(--accent-cyan);
+  --color-accent-dark: var(--accent-teal);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
@@ -31,12 +41,35 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    linear-gradient(180deg, rgba(0, 240, 255, 0.055) 0, rgba(0, 240, 255, 0) 260px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    var(--background);
+  background-size: auto, 72px 72px, 72px 72px, auto;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.25);
+  color: var(--text-primary);
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  outline-color: var(--accent-cyan);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
 }
 
 /* Custom scrollbar for Binance theme */
@@ -54,7 +87,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: var(--border-strong);
 }
 
 @layer base {
@@ -62,4 +95,19 @@ body {
     scroll-behavior: smooth;
     scroll-padding-top: 20px;
   }
+}
+
+.site-shell {
+  background:
+    linear-gradient(180deg, rgba(0, 240, 255, 0.045), transparent 320px),
+    var(--background);
+}
+
+.market-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
+    var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  box-shadow: 0 16px 48px var(--shadow-color);
 }

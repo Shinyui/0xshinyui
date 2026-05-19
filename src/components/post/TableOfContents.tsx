@@ -16,23 +16,24 @@ export default function TableOfContents({
   if (items.length === 0) return null;
 
   const isMobile = variant === 'mobile';
+  const headingClassName = isMobile
+    ? 'mb-2 block text-base font-semibold'
+    : 'mb-4 block text-lg font-semibold';
 
   return (
     <nav
       className={`
-        ${isMobile ? 'block md:hidden mb-6' : 'sticky top-6 self-start pr-4 hidden md:block'}
-        text-sm p-4 rounded-lg border
+        ${isMobile ? 'block md:hidden mb-6' : 'sticky top-24 self-start hidden md:block'}
+        rounded-lg border p-4 text-sm
       `}
       style={{
         borderColor: 'var(--border-color)',
-        backgroundColor: 'var(--card-background)',
-        boxShadow: '0 4px 6px var(--shadow-color)',
+        background:
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--card-background)',
+        boxShadow: '0 14px 38px var(--shadow-color)',
       }}
     >
-      <strong
-        className={`block mb-${isMobile ? '2' : '4'} text-${isMobile ? 'base' : 'lg'} font-semibold`}
-        style={{ color: 'var(--accent-gold)' }}
-      >
+      <strong className={headingClassName} style={{ color: 'var(--accent-cyan)' }}>
         目錄
       </strong>
       <ul className="space-y-2">
@@ -42,7 +43,7 @@ export default function TableOfContents({
               href={`#${item.slug}`}
               className={`
                 ${isMobile ? '' : 'text-base'}
-                block transition-colors duration-300
+                block rounded px-2 py-1 transition-colors duration-200
                 ${item.lvl === 2 ? '' : ''}
                 ${item.lvl === 3 ? 'pl-4' : ''}
                 ${item.lvl === 4 ? 'pl-6' : ''}
@@ -51,10 +52,12 @@ export default function TableOfContents({
               `}
               style={{ color: 'var(--text-secondary)' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--accent-gold)';
+                e.currentTarget.style.color = 'var(--accent-cyan)';
+                e.currentTarget.style.backgroundColor = 'var(--hover-background)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = 'var(--text-secondary)';
+                e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
               {item.content}

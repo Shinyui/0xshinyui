@@ -8,7 +8,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, error, isInvalid = false, options, className = '', ...props }, ref) => {
+  ({ label, error, isInvalid = false, options, className = '', style, onFocus, onBlur, ...props }, ref) => {
     const hasError = isInvalid || !!error;
 
     return (
@@ -24,21 +24,24 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         )}
         <select
           ref={ref}
-          className={`w-full p-3 rounded-lg border text-sm cursor-pointer transition-all duration-200 ${className}`}
+          className={`w-full cursor-pointer rounded-md border p-3 text-sm transition-all duration-200 ${className}`}
           style={{
-            backgroundColor: 'var(--background)',
+            backgroundColor: 'var(--surface)',
             borderColor: hasError ? '#ef4444' : 'var(--border-color)',
             color: 'var(--text-primary)',
+            ...style,
           }}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--accent-gold)';
+            e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--accent-cyan)';
             e.currentTarget.style.boxShadow = hasError
               ? '0 0 0 3px rgba(239, 68, 68, 0.2)'
-              : '0 0 0 3px rgba(240, 185, 11, 0.2)';
+              : '0 0 0 3px rgba(0, 240, 255, 0.16)';
+            onFocus?.(e);
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--border-color)';
             e.currentTarget.style.boxShadow = 'none';
+            onBlur?.(e);
           }}
           {...props}
         >

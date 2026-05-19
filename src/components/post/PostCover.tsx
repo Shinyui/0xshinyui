@@ -17,7 +17,7 @@ export default function PostCover({
 }: PostCoverProps) {
   return (
     <div
-      className="relative w-full h-48 mb-3 rounded overflow-hidden border"
+      className="relative mb-4 h-48 w-full overflow-hidden rounded-md border"
       style={{
         borderColor: 'var(--border-color)',
         aspectRatio
@@ -27,7 +27,7 @@ export default function PostCover({
         src={src}
         alt={alt}
         fill
-        className="object-cover transition-transform duration-300 hover:scale-110"
+        className="object-cover transition-transform duration-500 hover:scale-105"
         sizes={sizes}
         priority={priority}
       />

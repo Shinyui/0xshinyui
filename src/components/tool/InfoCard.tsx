@@ -4,14 +4,14 @@ import Card from '@/components/ui/Card';
 interface InfoCardProps {
   title: string;
   content: ReactNode;
-  titleColor?: 'gold' | 'primary';
+  titleColor?: 'accent' | 'gold' | 'primary';
   hoverEffect?: boolean;
 }
 
 export default function InfoCard({
   title,
   content,
-  titleColor = 'gold',
+  titleColor = 'accent',
   hoverEffect = true,
 }: InfoCardProps) {
   return (
@@ -19,7 +19,7 @@ export default function InfoCard({
       <h2
         className="text-lg font-semibold mb-3"
         style={{
-          color: titleColor === 'gold' ? 'var(--accent-gold)' : 'var(--text-primary)',
+          color: titleColor === 'primary' ? 'var(--text-primary)' : 'var(--accent-cyan)',
         }}
       >
         {title}

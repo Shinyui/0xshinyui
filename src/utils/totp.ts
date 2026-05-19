@@ -69,7 +69,7 @@ export function generateTOTP(secret: string, timeStep: number = 30): string {
       1000000;
 
     return code.toString().padStart(6, '0');
-  } catch (error) {
+  } catch {
     return '錯誤';
   }
 }

@@ -19,19 +19,34 @@ export default function TwoFAPage() {
       canonical="/2fa"
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1
-          className="text-2xl sm:text-3xl font-bold mb-6"
-          style={{ color: 'var(--text-primary)' }}
+        <section
+          className="mb-6 rounded-lg border p-6"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+            borderColor: 'var(--border-color)',
+          }}
         >
-          2FA 驗證碼生成器
-        </h1>
+          <p
+            className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-cyan)' }}
+          >
+            Security
+          </p>
+          <h1
+            className="text-2xl font-bold sm:text-4xl"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            2FA 驗證碼生成器
+          </h1>
+        </section>
 
         <div className="space-y-6">
           {/* 輸入區域 */}
           <Card padding="lg">
             <h2
               className="text-lg font-semibold mb-4"
-              style={{ color: 'var(--accent-gold)' }}
+              style={{ color: 'var(--accent-cyan)' }}
             >
               輸入 2FA 密鑰
             </h2>
@@ -55,7 +70,7 @@ export default function TwoFAPage() {
             <Card padding="lg">
               <h2
                 className="text-lg font-semibold mb-4"
-                style={{ color: 'var(--accent-gold)' }}
+                style={{ color: 'var(--accent-cyan)' }}
               >
                 當前驗證碼
               </h2>
@@ -81,7 +96,7 @@ export default function TwoFAPage() {
                       className="h-full transition-all duration-1000 ease-linear"
                       style={{
                         backgroundColor:
-                          timeLeft > 10 ? 'var(--accent-gold)' : '#ef4444',
+                          timeLeft > 10 ? 'var(--accent-cyan)' : '#ef4444',
                         width: `${(timeLeft / 30) * 100}%`,
                       }}
                     />
@@ -96,12 +111,12 @@ export default function TwoFAPage() {
             className="p-4 rounded-lg border-l-4 bg-opacity-50"
             style={{
               backgroundColor: 'var(--card-background)',
-              borderLeftColor: 'var(--accent-gold)',
+              borderLeftColor: 'var(--accent-cyan)',
             }}
           >
             <h3
               className="font-semibold mb-2"
-              style={{ color: 'var(--accent-gold)' }}
+              style={{ color: 'var(--accent-cyan)' }}
             >
               使用說明
             </h3>

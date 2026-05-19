@@ -1,6 +1,7 @@
 import { getPostBySlug, getSlugs } from '@/lib/posts';
 import Layout from '@/components/layout/Layout';
 import TableOfContents from '@/components/post/TableOfContents';
+import AdSlot from '@/components/ads/AdSlot';
 import { ArticleJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 import { siteConfig } from '@/lib/siteConfig';
 import { getMDXComponents } from '@/components/mdx';
@@ -63,13 +64,13 @@ export default function Post({ post }: PostProps) {
         ]}
       />
       {/* 封面 + 基本資料 */}
-      <div className="mx-auto mb-12">
+      <div className="mx-auto mb-10">
         {post.coverImage && (
           <div
-            className="w-full aspect-[16/9] mb-6 rounded-lg overflow-hidden shadow-lg border relative"
+            className="relative mb-6 aspect-[16/9] w-full overflow-hidden rounded-lg border"
             style={{
               borderColor: 'var(--border-color)',
-              boxShadow: '0 8px 25px var(--shadow-color)',
+              boxShadow: '0 18px 48px var(--shadow-color)',
             }}
           >
             <Image
@@ -82,8 +83,14 @@ export default function Post({ post }: PostProps) {
             />
           </div>
         )}
+        <p
+          className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+          style={{ color: 'var(--accent-cyan)' }}
+        >
+          Field Note
+        </p>
         <h1
-          className="text-4xl font-bold mb-2"
+          className="mb-3 text-3xl font-bold leading-tight sm:text-5xl"
           style={{ color: 'var(--text-primary)' }}
         >
           {post.title}
@@ -97,19 +104,22 @@ export default function Post({ post }: PostProps) {
       </div>
 
       {/* 排版主體區塊：手機單欄，桌機兩欄 */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-8">
-        {/* 桌機版目錄（sticky 側欄） */}
-        <TableOfContents items={post.toc} variant="desktop" />
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-[260px_1fr]">
+        <aside className="hidden md:block">
+          <TableOfContents items={post.toc} variant="desktop" />
+          <AdSlot
+            compact
+            className="mt-6"
+            placement="Article side rail"
+          />
+        </aside>
 
-        {/* 右側文章區（含手機版目錄） */}
         <div>
-          {/* 手機版目錄（出現在文章上方） */}
           <TableOfContents items={post.toc} variant="mobile" />
 
-          {/* 正文內容 */}
           <article
             className="
-              prose max-w-none p-6 rounded-lg border
+              prose max-w-none rounded-lg border p-5 sm:p-8
               [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4
               [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3
               [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:mt-5 [&_h3]:mb-2
@@ -126,20 +136,20 @@ export default function Post({ post }: PostProps) {
 
               [&_p]:text-base [&_p]:mb-4 [&_p]:leading-relaxed
               [&_a]:transition-colors [&_a]:duration-300
-              [&_a]:text-[var(--accent-gold)]
-              [&_a:hover]:text-[var(--accent-gold-dark)]
+              [&_a]:text-[var(--accent-cyan)]
+              [&_a:hover]:text-[var(--accent-teal)]
               [&_strong]:font-semibold [&_strong]:text-[var(--text-primary)]
               [&_em]:italic
               [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:py-2
               [&_blockquote]:italic [&_blockquote]:my-6
-              [&_blockquote]:border-[var(--accent-gold)]
+              [&_blockquote]:border-[var(--accent-cyan)]
               [&_blockquote]:bg-[var(--hover-background)]
               [&_blockquote_p]:mb-0
               [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-4
               [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-4
               [&_li]:mb-1
               [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm
-              [&_code]:font-mono [&_code]:text-[var(--accent-gold)]
+              [&_code]:font-mono [&_code]:text-[var(--accent-cyan)]
               [&_pre]:rounded [&_pre]:p-4 [&_pre]:overflow-x-auto [&_pre]:my-6
               [&_pre]:bg-[#000000] [&_pre]:text-[var(--text-primary)]
               [&_table]:table-auto [&_table]:border [&_table]:text-sm [&_table]:my-6
@@ -156,14 +166,16 @@ export default function Post({ post }: PostProps) {
               [id]:target:before:h-20 [id]:target:before:-mt-20
             "
             style={{
-              backgroundColor: 'var(--card-background)',
+              background:
+                'linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--card-background)',
               borderColor: 'var(--border-color)',
               color: 'var(--text-secondary)',
-              boxShadow: '0 4px 6px var(--shadow-color)',
+              boxShadow: '0 14px 38px var(--shadow-color)',
             }}
           >
             <MDXRemote {...post.mdxSource} components={mdxComponents} />
           </article>
+          <AdSlot className="mt-8" placement="Post-read native banner" />
         </div>
       </div>
     </Layout>
@@ -207,7 +219,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
       revalidate: 60,
     };
-  } catch (error) {
+  } catch {
     return {
       notFound: true,
     };

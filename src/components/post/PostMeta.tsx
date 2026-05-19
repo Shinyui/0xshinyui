@@ -14,17 +14,17 @@ export default function PostMeta({
   return (
     <>
       <p
-        className="inline-block mb-1 py-[4px] px-[8px] rounded text-[12px] font-medium"
+        className="mb-2 inline-block rounded px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]"
         style={{
-          backgroundColor: 'var(--accent-gold)',
-          color: 'var(--background)',
-          opacity: 0.9,
+          backgroundColor: 'rgba(0, 240, 255, 0.12)',
+          border: '1px solid rgba(0, 240, 255, 0.22)',
+          color: 'var(--accent-cyan)',
         }}
       >
         {getCategoryDisplayName(category)}
       </p>
       <p
-        className="text-xs mb-2"
+        className="mb-3 text-xs"
         style={{
           color: dateVariant === 'muted' ? 'var(--text-muted)' : 'var(--text-secondary)',
         }}

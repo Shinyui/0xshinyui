@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import ProductCard from '@/components/shop/ProductCard';
+import AdSlot from '@/components/ads/AdSlot';
 import { shopCategories, TELEGRAM_HANDLE } from '@/lib/shopConfig';
 
 const ShopPage = () => {
@@ -13,25 +14,42 @@ const ShopPage = () => {
       description="Web3 空投腳本與空投基建資源，透過 Telegram 聯繫購買"
       canonical="/shop"
     >
-      <div className="min-h-screen py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* Page header */}
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-amber-600 bg-clip-text text-transparent">
+      <div className="py-6 sm:py-10">
+        <div className="max-w-6xl mx-auto">
+          <div
+            className="mb-10 rounded-lg border p-6 text-center sm:p-8"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            <p
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+              style={{ color: 'var(--accent-cyan)' }}
+            >
+              Shop
+            </p>
+            <h1
+              className="text-3xl font-bold sm:text-5xl"
+              style={{ color: 'var(--text-primary)' }}
+            >
               商店
             </h1>
             <p
-              className="text-xl max-w-2xl mx-auto leading-relaxed"
-              style={{ color: 'var(--text-muted)' }}
+              className="mx-auto mt-4 max-w-2xl text-base leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
             >
               Web3 空投腳本與基建資源，所有商品透過 Telegram 聯繫購買
             </p>
           </div>
 
-          {/* Tabs */}
           <div
-            className="flex gap-1 mb-10 p-1 rounded-xl inline-flex"
-            style={{ backgroundColor: 'var(--card-background)' }}
+            className="mb-10 inline-flex flex-wrap gap-1 rounded-lg border p-1"
+            style={{
+              backgroundColor: 'var(--card-background)',
+              borderColor: 'var(--border-color)',
+            }}
           >
             {shopCategories.map((category) => {
               const isActive = category.id === activeTab;
@@ -39,10 +57,10 @@ const ShopPage = () => {
                 <button
                   key={category.id}
                   onClick={() => setActiveTab(category.id)}
-                  className="px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+                  className="rounded-md px-6 py-2.5 text-sm font-medium transition-all duration-200"
                   style={{
                     backgroundColor: isActive
-                      ? 'var(--accent-gold)'
+                      ? 'var(--accent-cyan)'
                       : 'transparent',
                     color: isActive ? '#0b0e11' : 'var(--text-secondary)',
                   }}
@@ -50,7 +68,7 @@ const ShopPage = () => {
                     if (!isActive) {
                       e.currentTarget.style.color = 'var(--text-primary)';
                       e.currentTarget.style.backgroundColor =
-                        'var(--border-color)';
+                        'var(--hover-background)';
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -66,7 +84,6 @@ const ShopPage = () => {
             })}
           </div>
 
-          {/* Active category subtitle */}
           <p
             className="mb-8 text-base"
             style={{ color: 'var(--text-muted)' }}
@@ -74,23 +91,20 @@ const ShopPage = () => {
             {activeCategory.subtitle}
           </p>
 
-          {/* Product grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {activeCategory.products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
-          {/* Bottom notice */}
           <div className="mt-16 text-center">
             <div
-              className="inline-block p-6 rounded-2xl border-2 border-dashed max-w-2xl"
+              className="inline-block max-w-2xl rounded-lg border border-dashed p-6"
               style={{
                 borderColor: 'var(--border-color)',
                 backgroundColor: 'var(--card-background)',
               }}
             >
-              <div className="text-3xl mb-3">🛡️</div>
               <h3
                 className="text-lg font-semibold mb-2"
                 style={{ color: 'var(--text-primary)' }}
@@ -103,6 +117,7 @@ const ShopPage = () => {
               </p>
             </div>
           </div>
+          <AdSlot className="mt-10" placement="Shop page footer banner" />
         </div>
       </div>
     </Layout>

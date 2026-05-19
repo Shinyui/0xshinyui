@@ -1,14 +1,23 @@
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer
-      className="w-full py-6 px-4 text-center text-sm"
+      className="w-full border-t px-4 py-8 text-sm"
       style={{
         color: 'var(--text-muted)',
-        borderTop: '1px solid var(--border-color)',
+        borderColor: 'var(--border-color)',
       }}
     >
-      ©2025 0xShinyui. All rights reserved. Created with{' '}
-      <span style={{ color: 'var(--accent-gold)' }}>❤️</span>
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p>©{year} 0xShinyui. All rights reserved.</p>
+        <p>
+          Product notes, dev logs, and operations playbooks.
+          <span className="ml-2" style={{ color: 'var(--accent-cyan)' }}>
+            Live, test, iterate.
+          </span>
+        </p>
+      </div>
     </footer>
   );
 }

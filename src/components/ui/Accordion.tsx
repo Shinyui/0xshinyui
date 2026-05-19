@@ -49,10 +49,10 @@ export default function Accordion({
         return (
           <div
             key={item.id}
-            className="rounded-lg border overflow-hidden transition-all duration-300"
+            className="overflow-hidden rounded-lg border transition-all duration-300"
             style={{
               backgroundColor: 'var(--card-background)',
-              borderColor: isOpen ? 'var(--accent-gold)' : 'var(--border-color)',
+              borderColor: isOpen ? 'var(--accent-cyan)' : 'var(--border-color)',
             }}
           >
             <button
@@ -67,7 +67,7 @@ export default function Accordion({
                 <div>
                   <h3
                     className="text-lg font-semibold"
-                    style={{ color: isOpen ? 'var(--accent-gold)' : 'var(--text-primary)' }}
+                    style={{ color: isOpen ? 'var(--accent-cyan)' : 'var(--text-primary)' }}
                   >
                     {item.title}
                   </h3>
@@ -82,7 +82,7 @@ export default function Accordion({
               <svg
                 className={`transition-transform duration-300`}
                 style={{
-                  color: 'var(--accent-gold)',
+                  color: 'var(--accent-cyan)',
                   transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                 }}
                 width="20"

@@ -12,7 +12,13 @@ export default function CategoryFilter({
   showAllButton = true,
 }: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2 mb-8">
+    <div
+      className="mb-8 flex flex-wrap gap-2 rounded-lg border p-2"
+      style={{
+        backgroundColor: 'rgba(16, 27, 30, 0.68)',
+        borderColor: 'var(--border-color)',
+      }}
+    >
       {showAllButton && (
         <CategoryTag
           category="all"

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import FeatureCard from '@/components/FeatureCard';
+import AdSlot from '@/components/ads/AdSlot';
 
 const ToolsPage = () => {
   const tools = [
@@ -41,25 +41,36 @@ const ToolsPage = () => {
       canonical="/tools"
     >
 
-      <div className="min-h-screen py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* 頁面標題 */}
-          <div className="text-center mb-16">
-            <h1 
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+      <div className="py-6 sm:py-10">
+        <div className="max-w-6xl mx-auto">
+          <div
+            className="mb-10 rounded-lg border p-6 text-center sm:p-8"
+            style={{
+              background:
+                'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            <p
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
+              style={{ color: 'var(--accent-cyan)' }}
             >
-              🛠️ 工具總覽
+              Utilities
+            </p>
+            <h1
+              className="text-3xl font-bold sm:text-5xl"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              工具總覽
             </h1>
             <p 
-              className="text-xl max-w-2xl mx-auto leading-relaxed"
-              style={{ color: "var(--text-muted)" }}
+              className="mx-auto mt-4 max-w-2xl text-base leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
             >
-              歡迎使用我們的實用工具集合！這裡提供各種便民工具，
-              幫助您更高效地處理日常網路需求。
+              實用工具集合，協助快速處理日常網路、安全與資料檢查需求。
             </p>
           </div>
 
-          {/* 工具卡片網格 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {tools.map((tool) => (
               <FeatureCard
@@ -73,20 +84,19 @@ const ToolsPage = () => {
                 features={tool.features}
                 buttonText="立即使用"
                 type="tool"
+                external={tool.external}
               />
             ))}
           </div>
 
-          {/* 底部說明 */}
           <div className="mt-16 text-center">
             <div 
-              className="inline-block p-6 rounded-2xl border-2 border-dashed max-w-2xl"
+              className="inline-block max-w-2xl rounded-lg border border-dashed p-6"
               style={{ 
                 borderColor: "var(--border-color)",
                 backgroundColor: "var(--card-background)"
               }}
             >
-              <div className="text-3xl mb-3">🚀</div>
               <h3 
                 className="text-lg font-semibold mb-2"
                 style={{ color: "var(--text-primary)" }}
@@ -101,6 +111,7 @@ const ToolsPage = () => {
               </p>
             </div>
           </div>
+          <AdSlot className="mt-10" placement="Tools page footer banner" />
         </div>
       </div>
 

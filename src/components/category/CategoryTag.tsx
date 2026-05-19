@@ -17,25 +17,28 @@ export default function CategoryTag({
   const displayName = getCategoryDisplayName(category);
 
   const className =
-    'inline-block px-3 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:scale-105';
+    'inline-block rounded-md border px-3 py-2 text-sm font-medium transition-all duration-200';
 
   const style = {
-    backgroundColor: isActive ? 'var(--accent-gold)' : 'var(--card-background)',
-    borderColor: 'var(--accent-gold)',
-    color: isActive ? 'var(--background)' : 'var(--accent-gold)',
+    backgroundColor: isActive ? 'var(--accent-cyan)' : 'transparent',
+    borderColor: isActive ? 'var(--accent-cyan)' : 'transparent',
+    color: isActive ? 'var(--background)' : 'var(--text-secondary)',
+    boxShadow: isActive ? '0 0 18px var(--glow-cyan)' : 'none',
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (!isActive) {
-      e.currentTarget.style.backgroundColor = 'var(--accent-gold)';
-      e.currentTarget.style.color = 'var(--background)';
+      e.currentTarget.style.backgroundColor = 'var(--hover-background)';
+      e.currentTarget.style.borderColor = 'var(--border-strong)';
+      e.currentTarget.style.color = 'var(--text-primary)';
     }
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
     if (!isActive) {
-      e.currentTarget.style.backgroundColor = 'var(--card-background)';
-      e.currentTarget.style.color = 'var(--accent-gold)';
+      e.currentTarget.style.backgroundColor = 'transparent';
+      e.currentTarget.style.borderColor = 'transparent';
+      e.currentTarget.style.color = 'var(--text-secondary)';
     }
   };
 

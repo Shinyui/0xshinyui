@@ -16,6 +16,9 @@ export default function Textarea({
   maxLength,
   value,
   className = '',
+  onFocus,
+  onBlur,
+  style,
   ...props
 }: TextareaProps) {
   const hasError = isInvalid || !!error;
@@ -34,22 +37,25 @@ export default function Textarea({
       )}
       <textarea
         value={value}
-        className={`w-full p-3 rounded-lg border text-sm resize-y transition-all duration-200 ${className}`}
+        className={`w-full resize-y rounded-md border p-3 text-sm transition-all duration-200 ${className}`}
         style={{
-          backgroundColor: 'var(--background)',
+          backgroundColor: 'var(--surface)',
           borderColor: hasError ? '#ef4444' : 'var(--border-color)',
           color: 'var(--text-primary)',
           minHeight: '80px',
+          ...style,
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--accent-gold)';
+          e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--accent-cyan)';
           e.currentTarget.style.boxShadow = hasError
             ? '0 0 0 3px rgba(239, 68, 68, 0.2)'
-            : '0 0 0 3px rgba(240, 185, 11, 0.2)';
+            : '0 0 0 3px rgba(0, 240, 255, 0.16)';
+          onFocus?.(e);
         }}
         onBlur={(e) => {
           e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--border-color)';
           e.currentTarget.style.boxShadow = 'none';
+          onBlur?.(e);
         }}
         maxLength={maxLength}
         {...props}

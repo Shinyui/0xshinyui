@@ -16,7 +16,6 @@ const defaultNavItems: NavItem[] = [
   { label: '首頁', href: '/' },
   { label: '工具總覽', href: '/tools' },
   { label: '商店', href: '/shop' },
-  { label: '名片', href: '/card' },
   { label: '關於我', href: '/about' },
 ];
 
@@ -33,77 +32,91 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
   };
 
   return (
-    <header
+    <header className="sticky top-0 z-40 border-b backdrop-blur-xl"
       style={{
-        backgroundColor: 'var(--card-background)',
-        borderBottom: '1px solid var(--border-color)',
-      }}
-      className="shadow-lg"
-    >
+        backgroundColor: 'rgba(5, 8, 8, 0.86)',
+        borderColor: 'var(--border-color)',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.28)',
+      }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo/Brand */}
           <Link
             href="/"
-            className="text-xl font-bold"
-            style={{ color: 'var(--accent-gold)' }}
+            className="inline-flex items-center gap-3"
+            style={{ color: 'var(--text-primary)' }}
           >
-            0xShinyui
+            <span
+              className="grid h-9 w-9 place-items-center rounded-md text-sm font-black"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-lime))',
+                color: 'var(--background)',
+                boxShadow: '0 0 24px var(--glow-cyan)',
+              }}
+            >
+              0x
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="text-base font-bold">0xShinyui</span>
+              <span
+                className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Product / Dev / Ops
+              </span>
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-6 text-base">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`border-b-2 pb-1 transition-all duration-300 hover:scale-105 ${
-                  router.pathname === item.href
-                    ? 'font-medium'
-                    : 'border-transparent hover:border-opacity-50'
-                }`}
-                style={{
-                  borderBottomColor:
-                    router.pathname === item.href
-                      ? 'var(--accent-gold)'
-                      : 'transparent',
-                  color:
-                    router.pathname === item.href
-                      ? 'var(--accent-gold)'
-                      : 'var(--text-primary)',
-                }}
-                onMouseEnter={(e) => {
-                  if (router.pathname !== item.href) {
-                    e.currentTarget.style.color = 'var(--accent-gold)';
-                    e.currentTarget.style.borderBottomColor =
-                      'var(--accent-gold)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (router.pathname !== item.href) {
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                    e.currentTarget.style.borderBottomColor = 'transparent';
-                  }
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav
+            className="hidden md:flex items-center gap-1 rounded-lg border p-1 text-sm"
+            style={{
+              backgroundColor: 'rgba(16, 27, 30, 0.72)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            {navItems.map((item) => {
+              const isActive = router.pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-md px-4 py-2 font-medium transition-all duration-200"
+                  style={{
+                    backgroundColor: isActive ? 'var(--accent-cyan)' : 'transparent',
+                    color: isActive ? 'var(--background)' : 'var(--text-secondary)',
+                    boxShadow: isActive ? '0 0 22px var(--glow-cyan)' : 'none',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--hover-background)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Mobile Hamburger Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 rounded-lg transition-colors duration-200"
+            className="md:hidden p-2 rounded-md border transition-colors duration-200"
             style={{
-              color: 'var(--text-primary)',
+              borderColor: 'var(--border-color)',
+              color: isMobileMenuOpen ? 'var(--background)' : 'var(--text-primary)',
               backgroundColor: isMobileMenuOpen
-                ? 'var(--accent-gold)'
+                ? 'var(--accent-cyan)'
                 : 'transparent',
             }}
             onMouseEnter={(e) => {
               if (!isMobileMenuOpen) {
-                e.currentTarget.style.backgroundColor = 'var(--border-color)';
+                e.currentTarget.style.backgroundColor = 'var(--hover-background)';
               }
             }}
             onMouseLeave={(e) => {
@@ -138,7 +151,6 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
           </button>
         </div>
 
-        {/* Mobile Navigation Menu */}
         <MobileMenu
           isOpen={isMobileMenuOpen}
           onClose={closeMobileMenu}

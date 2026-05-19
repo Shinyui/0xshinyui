@@ -15,7 +15,6 @@ interface FeatureCardProps {
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
-  id,
   title,
   description,
   path,
@@ -30,37 +29,39 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 
   const card = (
       <div
-        className="group relative overflow-hidden rounded-2xl transition-all duration-500 transform hover:scale-105 cursor-pointer"
+        className="group relative h-full cursor-pointer overflow-hidden rounded-lg border transition-all duration-300"
         style={{
-          backgroundColor: "var(--card-background)",
-          boxShadow: isHovered 
-            ? `0 25px 50px -12px ${color}40` 
-            : "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+          background:
+            "linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--card-background)",
+          borderColor: isHovered ? color : "var(--border-color)",
+          boxShadow: isHovered
+            ? `0 22px 50px -18px ${color}80`
+            : "0 14px 38px var(--shadow-color)",
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* 背景漸變效果 */}
         <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+          className="absolute inset-x-0 top-0 h-px opacity-70 transition-opacity duration-300"
           style={{
-            background: `linear-gradient(135deg, ${color}20, ${color}05)`
+            background: `linear-gradient(90deg, transparent, ${color}, transparent)`
           }}
         />
         
-        {/* 卡片內容 */}
-        <div className="relative p-8">
-          {/* 圖標和標題 */}
-          <div className="flex items-center mb-6">
+        <div className="relative p-6">
+          <div className="mb-6 flex items-center">
             <div 
-              className="w-16 h-16 rounded-xl flex items-center justify-center text-2xl mr-4 transition-transform duration-300 group-hover:scale-110"
-              style={{ backgroundColor: `${color}15` }}
+              className="mr-4 flex h-14 w-14 items-center justify-center rounded-md text-2xl transition-transform duration-300 group-hover:scale-105"
+              style={{
+                backgroundColor: `${color}18`,
+                border: `1px solid ${color}30`,
+              }}
             >
               {icon}
             </div>
             <div>
               <h3 
-                className="text-2xl font-bold mb-1 group-hover:text-opacity-80 transition-all duration-300"
+                className="mb-1 text-xl font-bold transition-all duration-300"
                 style={{ color: "var(--text-primary)" }}
               >
                 {title}
@@ -72,19 +73,17 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
             </div>
           </div>
 
-          {/* 描述 */}
           <p 
-            className="text-base leading-relaxed mb-6"
-            style={{ color: "var(--text-muted)" }}
+            className="mb-6 text-sm leading-relaxed"
+            style={{ color: "var(--text-secondary)" }}
           >
             {description}
           </p>
 
-          {/* 功能特色 */}
           <div className="mb-6">
             <h4 
-              className="text-sm font-semibold mb-3 opacity-70"
-              style={{ color: "var(--text-primary)" }}
+              className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]"
+              style={{ color: "var(--text-muted)" }}
             >
               {type === 'game' ? '遊戲特色' : '主要功能'}
             </h4>
@@ -105,19 +104,17 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
             </div>
           </div>
 
-          {/* 按鈕和裝飾 */}
           <div className="flex items-center justify-between">
             <div 
-              className="px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:shadow-lg"
+              className="rounded-md px-5 py-2.5 text-sm font-semibold transition-all duration-300"
               style={{
-                backgroundColor: `${color}15`,
-                color: color,
+                backgroundColor: isHovered ? color : `${color}15`,
+                color: isHovered ? "var(--background)" : color,
               }}
             >
               {buttonText} →
             </div>
             
-            {/* 裝飾性元素 */}
             <div className="flex space-x-1">
               {[...Array(3)].map((_, i) => (
                 <div
@@ -134,9 +131,8 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
           </div>
         </div>
 
-        {/* 邊框光效 */}
         <div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style={{
             background: `linear-gradient(90deg, transparent, ${color}30, transparent)`,
             backgroundSize: '200% 100%',

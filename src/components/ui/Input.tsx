@@ -11,6 +11,9 @@ export default function Input({
   error,
   isInvalid = false,
   className = '',
+  onFocus,
+  onBlur,
+  style,
   ...props
 }: InputProps) {
   const hasError = isInvalid || !!error;
@@ -27,11 +30,24 @@ export default function Input({
         </label>
       )}
       <input
-        className={`w-full p-3 rounded-lg border text-sm ${className}`}
+        className={`w-full rounded-md border p-3 text-sm transition-all duration-200 ${className}`}
         style={{
-          backgroundColor: 'var(--background)',
+          backgroundColor: 'var(--surface)',
           borderColor: hasError ? '#ef4444' : 'var(--border-color)',
           color: 'var(--text-primary)',
+          ...style,
+        }}
+        onFocus={(e) => {
+          e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--accent-cyan)';
+          e.currentTarget.style.boxShadow = hasError
+            ? '0 0 0 3px rgba(239, 68, 68, 0.2)'
+            : '0 0 0 3px rgba(0, 240, 255, 0.16)';
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--border-color)';
+          e.currentTarget.style.boxShadow = 'none';
+          onBlur?.(e);
         }}
         {...props}
       />

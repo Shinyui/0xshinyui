@@ -27,20 +27,21 @@ export default function Card({
       className={`
         rounded-lg border
         ${paddingClasses[padding]}
-        ${hoverable ? 'transition-all duration-300 hover:shadow-xl' : ''}
+        ${hoverable ? 'transition-all duration-300' : ''}
         ${className}
       `}
       style={{
-        backgroundColor: 'var(--card-background)',
+        background:
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent), var(--card-background)',
         borderColor: 'var(--border-color)',
-        boxShadow: '0 4px 6px var(--shadow-color)',
+        boxShadow: '0 14px 38px var(--shadow-color)',
         ...style,
       }}
       onMouseEnter={
         hoverable
           ? (e) => {
-              e.currentTarget.style.borderColor = 'var(--accent-gold)';
-              e.currentTarget.style.boxShadow = '0 8px 25px var(--shadow-color)';
+              e.currentTarget.style.borderColor = 'var(--accent-cyan)';
+              e.currentTarget.style.boxShadow = '0 18px 48px var(--shadow-color), 0 0 24px var(--glow-cyan)';
             }
           : undefined
       }
@@ -48,7 +49,7 @@ export default function Card({
         hoverable
           ? (e) => {
               e.currentTarget.style.borderColor = 'var(--border-color)';
-              e.currentTarget.style.boxShadow = '0 4px 6px var(--shadow-color)';
+              e.currentTarget.style.boxShadow = '0 14px 38px var(--shadow-color)';
             }
           : undefined
       }
