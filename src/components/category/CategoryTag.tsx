@@ -20,10 +20,10 @@ export default function CategoryTag({
     'inline-block rounded-md border px-3 py-2 text-sm font-medium transition-all duration-200';
 
   const style = {
-    backgroundColor: isActive ? 'var(--accent-cyan)' : 'transparent',
-    borderColor: isActive ? 'var(--accent-cyan)' : 'transparent',
+    backgroundColor: isActive ? 'var(--accent-mint)' : 'transparent',
+    borderColor: isActive ? 'var(--accent-mint)' : 'transparent',
     color: isActive ? 'var(--background)' : 'var(--text-secondary)',
-    boxShadow: isActive ? '0 0 18px var(--glow-cyan)' : 'none',
+    boxShadow: isActive ? '0 0 18px var(--glow-mint)' : 'none',
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
@@ -42,7 +42,6 @@ export default function CategoryTag({
     }
   };
 
-  // 如果提供了 onClick，渲染為 button
   if (onClick) {
     return (
       <button
@@ -57,7 +56,6 @@ export default function CategoryTag({
     );
   }
 
-  // 否則渲染為 Link
   const linkHref = href || `/category/${encodeURIComponent(category)}`;
 
   return (

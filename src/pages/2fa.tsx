@@ -17,20 +17,24 @@ export default function TwoFAPage() {
       title="2FA 驗證碼生成器 - 0xShinyui"
       description="安全的雙因素驗證碼生成工具"
       canonical="/2fa"
+      hideSidebar
+      hideTopBanner
+      hideStickyBottom
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <section
           className="mb-6 rounded-lg border p-6"
           style={{
             background:
-              'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+              'linear-gradient(135deg, rgba(84, 255, 213, 0.10), rgba(2, 192, 118, 0.04)), var(--surface)',
             borderColor: 'var(--border-color)',
           }}
         >
           <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
-            style={{ color: 'var(--accent-cyan)' }}
+            className="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-mint)' }}
           >
+            <span className="status-dot" />
             Security
           </p>
           <h1
@@ -46,7 +50,7 @@ export default function TwoFAPage() {
           <Card padding="lg">
             <h2
               className="text-lg font-semibold mb-4"
-              style={{ color: 'var(--accent-cyan)' }}
+              style={{ color: 'var(--accent-mint)' }}
             >
               輸入 2FA 密鑰
             </h2>
@@ -70,7 +74,7 @@ export default function TwoFAPage() {
             <Card padding="lg">
               <h2
                 className="text-lg font-semibold mb-4"
-                style={{ color: 'var(--accent-cyan)' }}
+                style={{ color: 'var(--accent-mint)' }}
               >
                 當前驗證碼
               </h2>
@@ -89,14 +93,16 @@ export default function TwoFAPage() {
                     剩餘時間：{timeLeft} 秒
                   </div>
                   <div
-                    className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden"
+                    className="w-16 h-2 rounded-full overflow-hidden"
                     style={{ backgroundColor: 'var(--border-color)' }}
                   >
                     <div
                       className="h-full transition-all duration-1000 ease-linear"
                       style={{
                         backgroundColor:
-                          timeLeft > 10 ? 'var(--accent-cyan)' : '#ef4444',
+                          timeLeft > 10
+                            ? 'var(--accent-mint)'
+                            : 'var(--accent-negative)',
                         width: `${(timeLeft / 30) * 100}%`,
                       }}
                     />
@@ -108,15 +114,15 @@ export default function TwoFAPage() {
 
           {/* 說明文字 */}
           <div
-            className="p-4 rounded-lg border-l-4 bg-opacity-50"
+            className="p-4 rounded-lg border-l-4"
             style={{
               backgroundColor: 'var(--card-background)',
-              borderLeftColor: 'var(--accent-cyan)',
+              borderLeftColor: 'var(--accent-mint)',
             }}
           >
             <h3
               className="font-semibold mb-2"
-              style={{ color: 'var(--accent-cyan)' }}
+              style={{ color: 'var(--accent-mint)' }}
             >
               使用說明
             </h3>

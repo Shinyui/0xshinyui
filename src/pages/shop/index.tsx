@@ -13,6 +13,7 @@ const ShopPage = () => {
       title="商店 - 0xShinyui"
       description="Web3 空投腳本與空投基建資源，透過 Telegram 聯繫購買"
       canonical="/shop"
+      hideSidebar
     >
       <div className="py-6 sm:py-10">
         <div className="max-w-6xl mx-auto">
@@ -20,14 +21,15 @@ const ShopPage = () => {
             className="mb-10 rounded-lg border p-6 text-center sm:p-8"
             style={{
               background:
-                'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+                'linear-gradient(135deg, rgba(84, 255, 213, 0.10), rgba(2, 192, 118, 0.04)), var(--surface)',
               borderColor: 'var(--border-color)',
             }}
           >
             <p
-              className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
-              style={{ color: 'var(--accent-cyan)' }}
+              className="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em]"
+              style={{ color: 'var(--accent-mint)' }}
             >
+              <span className="status-dot" />
               Shop
             </p>
             <h1
@@ -60,9 +62,10 @@ const ShopPage = () => {
                   className="rounded-md px-6 py-2.5 text-sm font-medium transition-all duration-200"
                   style={{
                     backgroundColor: isActive
-                      ? 'var(--accent-cyan)'
+                      ? 'var(--accent-mint)'
                       : 'transparent',
-                    color: isActive ? '#0b0e11' : 'var(--text-secondary)',
+                    color: isActive ? 'var(--background)' : 'var(--text-secondary)',
+                    boxShadow: isActive ? '0 0 18px var(--glow-mint)' : 'none',
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
@@ -117,7 +120,11 @@ const ShopPage = () => {
               </p>
             </div>
           </div>
-          <AdSlot className="mt-10" placement="Shop page footer banner" />
+          <AdSlot
+            size="large-banner"
+            className="mt-10"
+            placement="Shop page footer banner"
+          />
         </div>
       </div>
     </Layout>

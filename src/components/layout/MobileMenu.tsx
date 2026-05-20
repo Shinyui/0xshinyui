@@ -34,12 +34,16 @@ export default function MobileMenu({
             style={{
               backgroundColor:
                 router.pathname === item.href
-                  ? 'var(--accent-cyan)'
+                  ? 'var(--accent-mint)'
                   : 'transparent',
               color:
                 router.pathname === item.href
                   ? 'var(--background)'
                   : 'var(--text-primary)',
+              boxShadow:
+                router.pathname === item.href
+                  ? '0 0 18px var(--glow-mint)'
+                  : 'none',
             }}
             onMouseEnter={(e) => {
               if (router.pathname !== item.href) {

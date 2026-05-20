@@ -32,14 +32,16 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b backdrop-blur-xl"
+    <header
+      className="sticky top-0 z-40 border-b backdrop-blur-xl"
       style={{
-        backgroundColor: 'rgba(5, 8, 8, 0.86)',
+        backgroundColor: 'rgba(11, 14, 17, 0.86)',
         borderColor: 'var(--border-color)',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.28)',
-      }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
-        <div className="flex items-center justify-between">
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.42)',
+      }}
+    >
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-3">
+        <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
             className="inline-flex items-center gap-3"
@@ -48,9 +50,10 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
             <span
               className="grid h-9 w-9 place-items-center rounded-md text-sm font-black"
               style={{
-                background: 'linear-gradient(135deg, var(--accent-cyan), var(--accent-lime))',
+                background:
+                  'linear-gradient(135deg, var(--accent-mint), var(--accent-positive))',
                 color: 'var(--background)',
-                boxShadow: '0 0 24px var(--glow-cyan)',
+                boxShadow: '0 0 24px var(--glow-mint)',
               }}
             >
               0x
@@ -58,7 +61,7 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
             <span className="flex flex-col leading-none">
               <span className="text-base font-bold">0xShinyui</span>
               <span
-                className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em]"
+                className="mt-1 text-[10px] font-medium uppercase tracking-[0.18em]"
                 style={{ color: 'var(--text-muted)' }}
               >
                 Product / Dev / Ops
@@ -66,10 +69,45 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
             </span>
           </Link>
 
+          <div
+            className="hidden xl:flex items-center gap-4 rounded-lg border px-4 py-2 font-mono text-[11px] tabular-nums"
+            style={{
+              backgroundColor: 'rgba(20, 24, 29, 0.72)',
+              borderColor: 'var(--border-color)',
+              color: 'var(--text-secondary)',
+            }}
+            aria-hidden
+          >
+            <div className="flex items-center gap-1.5">
+              <span
+                className="text-[9px] uppercase tracking-[0.22em]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                IDX
+              </span>
+              <span style={{ color: 'var(--text-primary)' }}>0x.SHIN</span>
+              <span className="ticker-up">+2.18%</span>
+            </div>
+            <div
+              className="h-3 w-px"
+              style={{ backgroundColor: 'var(--border-strong)' }}
+            />
+            <div className="flex items-center gap-1.5">
+              <span
+                className="text-[9px] uppercase tracking-[0.22em]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                VOL
+              </span>
+              <span style={{ color: 'var(--text-primary)' }}>24h</span>
+              <span className="ticker-up">▲</span>
+            </div>
+          </div>
+
           <nav
             className="hidden md:flex items-center gap-1 rounded-lg border p-1 text-sm"
             style={{
-              backgroundColor: 'rgba(16, 27, 30, 0.72)',
+              backgroundColor: 'rgba(20, 24, 29, 0.72)',
               borderColor: 'var(--border-color)',
             }}
           >
@@ -81,9 +119,9 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
                   href={item.href}
                   className="rounded-md px-4 py-2 font-medium transition-all duration-200"
                   style={{
-                    backgroundColor: isActive ? 'var(--accent-cyan)' : 'transparent',
+                    backgroundColor: isActive ? 'var(--accent-mint)' : 'transparent',
                     color: isActive ? 'var(--background)' : 'var(--text-secondary)',
-                    boxShadow: isActive ? '0 0 22px var(--glow-cyan)' : 'none',
+                    boxShadow: isActive ? '0 0 22px var(--glow-mint)' : 'none',
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
@@ -111,7 +149,7 @@ export default function Header({ navItems = defaultNavItems }: HeaderProps) {
               borderColor: 'var(--border-color)',
               color: isMobileMenuOpen ? 'var(--background)' : 'var(--text-primary)',
               backgroundColor: isMobileMenuOpen
-                ? 'var(--accent-cyan)'
+                ? 'var(--accent-mint)'
                 : 'transparent',
             }}
             onMouseEnter={(e) => {

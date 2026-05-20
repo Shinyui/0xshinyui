@@ -17,20 +17,24 @@ export default function IpPage({ ip, userAgent, timestamp }: IpPageProps) {
       title="IP 地址查詢 - 0xShinyui"
       description="查詢您的公網 IP 地址和瀏覽器資訊"
       canonical="/ip"
+      hideSidebar
+      hideTopBanner
+      hideStickyBottom
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <section
           className="mb-6 rounded-lg border p-6"
           style={{
             background:
-              'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+              'linear-gradient(135deg, rgba(84, 255, 213, 0.10), rgba(2, 192, 118, 0.04)), var(--surface)',
             borderColor: 'var(--border-color)',
           }}
         >
           <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
-            style={{ color: 'var(--accent-cyan)' }}
+            className="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-mint)' }}
           >
+            <span className="status-dot" />
             Network
           </p>
           <h1
@@ -82,18 +86,14 @@ export default function IpPage({ ip, userAgent, timestamp }: IpPageProps) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
-  
-  // 獲取真實 IP 地址（考慮代理和負載均衡器）
+
   const forwarded = req.headers["x-forwarded-for"] as string;
   const realIp = req.headers["x-real-ip"] as string;
   const ip = forwarded
     ? forwarded.split(",")[0].trim()
     : realIp || req.socket.remoteAddress || "未知";
 
-  // 獲取 User Agent
   const userAgent = req.headers['user-agent'] || '未知瀏覽器';
-
-  // 獲取當前時間戳
   const timestamp = formatTaiwanDate(new Date(), 'full');
 
   return {

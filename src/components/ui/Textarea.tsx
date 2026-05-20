@@ -32,7 +32,11 @@ export default function Textarea({
           style={{ color: 'var(--text-primary)' }}
         >
           {label}
-          {props.required && <span className="text-red-500 ml-1">*</span>}
+          {props.required && (
+            <span className="ml-1" style={{ color: 'var(--accent-negative)' }}>
+              *
+            </span>
+          )}
         </label>
       )}
       <textarea
@@ -40,20 +44,20 @@ export default function Textarea({
         className={`w-full resize-y rounded-md border p-3 text-sm transition-all duration-200 ${className}`}
         style={{
           backgroundColor: 'var(--surface)',
-          borderColor: hasError ? '#ef4444' : 'var(--border-color)',
+          borderColor: hasError ? 'var(--accent-negative)' : 'var(--border-color)',
           color: 'var(--text-primary)',
           minHeight: '80px',
           ...style,
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--accent-cyan)';
+          e.currentTarget.style.borderColor = hasError ? 'var(--accent-negative)' : 'var(--accent-mint)';
           e.currentTarget.style.boxShadow = hasError
-            ? '0 0 0 3px rgba(239, 68, 68, 0.2)'
-            : '0 0 0 3px rgba(0, 240, 255, 0.16)';
+            ? '0 0 0 3px rgba(246, 70, 93, 0.22)'
+            : '0 0 0 3px rgba(84, 255, 213, 0.18)';
           onFocus?.(e);
         }}
         onBlur={(e) => {
-          e.currentTarget.style.borderColor = hasError ? '#ef4444' : 'var(--border-color)';
+          e.currentTarget.style.borderColor = hasError ? 'var(--accent-negative)' : 'var(--border-color)';
           e.currentTarget.style.boxShadow = 'none';
           onBlur?.(e);
         }}
@@ -62,7 +66,12 @@ export default function Textarea({
       />
       <div className="flex justify-between items-center mt-1">
         {error && (
-          <p className="text-sm text-red-500">❌ {error}</p>
+          <p
+            className="text-sm"
+            style={{ color: 'var(--accent-negative)' }}
+          >
+            ❌ {error}
+          </p>
         )}
         {showCharCount && maxLength && (
           <span

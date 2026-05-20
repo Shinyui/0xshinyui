@@ -13,14 +13,15 @@ export default function Profile() {
           className="mb-6 rounded-lg border p-6"
           style={{
             background:
-              'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+              'linear-gradient(135deg, rgba(84, 255, 213, 0.10), rgba(2, 192, 118, 0.04)), var(--surface)',
             borderColor: 'var(--border-color)',
           }}
         >
           <p
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
-            style={{ color: 'var(--accent-cyan)' }}
+            className="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-mint)' }}
           >
+            <span className="status-dot" />
             About
           </p>
           <h1

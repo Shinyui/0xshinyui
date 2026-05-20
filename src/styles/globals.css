@@ -1,28 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  /* Bitget-inspired dark trading interface */
-  --background: #050808;
-  --foreground: #f2f7f8;
-  --surface: #081012;
-  --surface-raised: #0d171a;
-  --card-background: #101b1e;
-  --border-color: #1f3338;
-  --border-strong: #2d5057;
-  --accent-cyan: #00f0ff;
-  --accent-teal: #00b8c4;
-  --accent-lime: #a8ff4f;
-  --accent-warning: #f5b744;
-  --accent-danger: #ff5c5c;
-  --accent-gold: var(--accent-cyan);
-  --accent-gold-dark: var(--accent-teal);
-  --text-primary: #f2f7f8;
-  --text-secondary: #9fb4b8;
-  --text-muted: #687d82;
-  --hover-background: #142326;
-  --shadow-color: rgba(0, 0, 0, 0.42);
-  --glow-cyan: rgba(0, 240, 255, 0.2);
-  --radius-card: 8px;
+  /* Bitget 2024-2026 mint palette */
+  --background: #0B0E11;
+  --foreground: #EAECEF;
+  --surface: #14181D;
+  --surface-raised: #1E2329;
+  --card-background: #1E2329;
+  --border-color: #2B3139;
+  --border-strong: #3A4049;
+
+  /* Brand: Bitget mint */
+  --accent-mint: #54FFD5;
+  --accent-mint-dark: #1FE9CC;
+  --accent-mint-soft: rgba(84, 255, 213, 0.12);
+
+  /* Trading semantic */
+  --accent-positive: #02C076;
+  --accent-negative: #F6465D;
+  --accent-warning: #F0B90B;
+
+  /* Back-compat aliases (existing components still reference these names) */
+  --accent-cyan: var(--accent-mint);
+  --accent-teal: var(--accent-mint-dark);
+  --accent-lime: var(--accent-positive);
+  --accent-gold: var(--accent-mint);
+  --accent-gold-dark: var(--accent-mint-dark);
+  --accent-danger: var(--accent-negative);
+
+  /* Text */
+  --text-primary: #EAECEF;
+  --text-secondary: #B7BDC6;
+  --text-muted: #5E6673;
+
+  /* Interaction */
+  --hover-background: #252B33;
+  --shadow-color: rgba(0, 0, 0, 0.55);
+  --glow-mint: rgba(84, 255, 213, 0.22);
+  --glow-cyan: var(--glow-mint);
+
+  --radius-card: 10px;
 }
 
 @theme inline {
@@ -30,8 +47,10 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card-background);
   --color-border: var(--border-color);
-  --color-accent: var(--accent-cyan);
-  --color-accent-dark: var(--accent-teal);
+  --color-accent: var(--accent-mint);
+  --color-accent-dark: var(--accent-mint-dark);
+  --color-positive: var(--accent-positive);
+  --color-negative: var(--accent-negative);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
@@ -42,9 +61,9 @@
 
 body {
   background:
-    linear-gradient(180deg, rgba(0, 240, 255, 0.055) 0, rgba(0, 240, 255, 0) 260px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    radial-gradient(circle at top, rgba(84, 255, 213, 0.06), transparent 55%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px),
     var(--background);
   background-size: auto, 72px 72px, 72px 72px, auto;
   color: var(--foreground);
@@ -55,7 +74,7 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 240, 255, 0.25);
+  background: rgba(84, 255, 213, 0.25);
   color: var(--text-primary);
 }
 
@@ -64,15 +83,14 @@ button,
 input,
 textarea,
 select {
-  outline-color: var(--accent-cyan);
+  outline-color: var(--accent-mint);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-cyan);
+  outline: 2px solid var(--accent-mint);
   outline-offset: 3px;
 }
 
-/* Custom scrollbar for Binance theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -99,7 +117,7 @@ select {
 
 .site-shell {
   background:
-    linear-gradient(180deg, rgba(0, 240, 255, 0.045), transparent 320px),
+    radial-gradient(circle at top, rgba(84, 255, 213, 0.05), transparent 480px),
     var(--background);
 }
 
@@ -110,4 +128,54 @@ select {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-card);
   box-shadow: 0 16px 48px var(--shadow-color);
+}
+
+.ticker-up {
+  color: var(--accent-positive);
+}
+
+.ticker-down {
+  color: var(--accent-negative);
+}
+
+.data-row {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.data-row:last-child {
+  border-bottom: none;
+}
+
+.brand-glow {
+  box-shadow: 0 0 24px var(--glow-mint);
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.18);
+  }
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--accent-positive);
+  box-shadow: 0 0 8px var(--accent-positive);
+  animation: pulse-dot 2s ease-in-out infinite;
 }

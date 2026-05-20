@@ -21,16 +21,27 @@ type Post = {
   } | null;
 };
 
+type SidebarPost = {
+  title: string;
+  slug: string;
+  date: string;
+  contentType: string;
+};
+
 type CategoryPageProps = {
   posts: Post[];
   category: string;
   allCategories: string[];
+  latestPosts: SidebarPost[];
+  lastUpdated: string | null;
 };
 
 export default function CategoryPage({
   posts,
   category,
   allCategories,
+  latestPosts,
+  lastUpdated,
 }: CategoryPageProps) {
   const router = useRouter();
 
@@ -51,36 +62,90 @@ export default function CategoryPage({
       title={`${categoryName} - 0xShinyui`}
       description={`瀏覽 ${categoryName} 分類下的文章`}
       canonical={`/category/${category}`}
+      latestPosts={latestPosts}
+      sidebarCategories={allCategories}
+      activeCategory={category}
     >
       <BreadcrumbJsonLd
         items={[
           { name: '首頁', url: siteConfig.siteUrl },
-          { name: categoryName, url: `${siteConfig.siteUrl}/category/${encodeURIComponent(category)}` },
+          {
+            name: categoryName,
+            url: `${siteConfig.siteUrl}/category/${encodeURIComponent(category)}`,
+          },
         ]}
       />
       <section
-        className="mb-8 rounded-lg border p-6"
+        className="mb-8 grid gap-0 overflow-hidden rounded-lg border lg:grid-cols-[1fr_280px]"
         style={{
           background:
-            'linear-gradient(135deg, rgba(0, 240, 255, 0.095), rgba(168, 255, 79, 0.035)), var(--surface)',
+            'linear-gradient(135deg, rgba(84, 255, 213, 0.09), rgba(2, 192, 118, 0.03)), var(--surface)',
           borderColor: 'var(--border-color)',
         }}
       >
-        <p
-          className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
-          style={{ color: 'var(--accent-cyan)' }}
+        <div className="p-6 sm:p-8">
+          <p
+            className="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--accent-mint)' }}
+          >
+            <span className="status-dot" />
+            Category · {category.toUpperCase()}/0x
+          </p>
+          <h1
+            className="text-2xl font-bold sm:text-4xl"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            {categoryName}
+          </h1>
+          <p
+            className="mt-3 text-base"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            此分類匯整關於「{categoryName}」的實戰記錄與思考。
+          </p>
+        </div>
+
+        <div
+          className="border-t p-6 lg:border-l lg:border-t-0"
+          style={{ borderColor: 'var(--border-color)' }}
         >
-          Category
-        </p>
-        <h1
-          className="text-2xl font-bold sm:text-4xl"
-          style={{ color: 'var(--text-primary)' }}
-        >
-          {categoryName} 文章
-        </h1>
-        <p className="mt-3" style={{ color: 'var(--text-secondary)' }}>
-          共 {posts.length} 篇文章
-        </p>
+          <p
+            className="text-[10px] font-semibold uppercase tracking-[0.24em]"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Stats
+          </p>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <div>
+              <p
+                className="font-mono text-2xl font-bold tabular-nums"
+                style={{ color: 'var(--accent-mint)' }}
+              >
+                {posts.length}
+              </p>
+              <p
+                className="text-[10px] uppercase tracking-[0.18em]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Posts
+              </p>
+            </div>
+            <div>
+              <p
+                className="font-mono text-sm tabular-nums"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                {lastUpdated ?? '—'}
+              </p>
+              <p
+                className="text-[10px] uppercase tracking-[0.18em]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Last Update
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <CategoryFilter
@@ -94,19 +159,27 @@ export default function CategoryPage({
           <p style={{ color: 'var(--text-secondary)' }}>此類別暫無文章</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post, index) => (
-            <Fragment key={post.slug}>
-              {index === 3 && (
-                <AdSlot
-                  className="sm:col-span-2 lg:col-span-3"
-                  placement={`${categoryName} category banner`}
-                />
-              )}
-              <PostCard post={post} />
-            </Fragment>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {posts.map((post, index) => (
+              <Fragment key={post.slug}>
+                {(index === 2 || index === 8) && (
+                  <AdSlot
+                    size="in-feed"
+                    className="sm:col-span-2 xl:col-span-3"
+                    placement={`${categoryName} category in-feed ${index === 2 ? 'A' : 'B'}`}
+                  />
+                )}
+                <PostCard post={post} />
+              </Fragment>
+            ))}
+          </div>
+          <AdSlot
+            size="large-banner"
+            className="mt-10"
+            placement={`${categoryName} category banner`}
+          />
+        </>
       )}
     </Layout>
   );
@@ -137,11 +210,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   );
   const allCategories = sortCategories(allCategoriesUnsorted);
 
+  const latestPosts = allPosts.slice(0, 5).map((p) => ({
+    title: p.title,
+    slug: p.slug,
+    date: p.date,
+    contentType: p.contentType,
+  }));
+
+  const lastUpdated = posts.length > 0 ? posts[0].date : null;
+
   return {
     props: {
       posts,
       category: decodedCategory,
       allCategories,
+      latestPosts,
+      lastUpdated,
     },
     revalidate: 60,
   };

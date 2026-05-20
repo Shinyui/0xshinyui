@@ -10,7 +10,7 @@ const ToolsPage = () => {
       description: '快速查看您的公網 IP 地址、瀏覽器資訊和訪問時間，幫助您了解網路連接狀態。',
       path: '/ip',
       icon: '🌐',
-      color: '#3b82f6',
+      color: '#54FFD5',
       features: ['即時 IP 顯示', '瀏覽器檢測', '時間戳記', '代理檢測']
     },
     {
@@ -19,7 +19,7 @@ const ToolsPage = () => {
       description: '安全的雙因素驗證碼生成工具，支援 TOTP 標準，完全在本地運行保護您的隱私。',
       path: '/2fa',
       icon: '🔐',
-      color: '#10b981',
+      color: '#02C076',
       features: ['TOTP 標準', '本地運算', '即時更新', '安全可靠']
     },
     {
@@ -28,7 +28,7 @@ const ToolsPage = () => {
       description: '精心挑選的 KOL 名單與分析平台，幫助你快速找到適合合作的網紅創作者。',
       path: 'https://kol.0xshinyui.xyz',
       icon: '⭐',
-      color: '#8b5cf6',
+      color: '#F0B90B',
       features: ['KOL 名單', '數據分析', '分類篩選', '外部網站'],
       external: true
     }
@@ -39,22 +39,24 @@ const ToolsPage = () => {
       title="工具總覽 - 0xShinyui"
       description="實用工具集合，包含 IP 查詢和 2FA 驗證碼生成器等便民工具"
       canonical="/tools"
+      hideSidebar
+      hideTopBanner
     >
-
       <div className="py-6 sm:py-10">
         <div className="max-w-6xl mx-auto">
           <div
             className="mb-10 rounded-lg border p-6 text-center sm:p-8"
             style={{
               background:
-                'linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(168, 255, 79, 0.04)), var(--surface)',
+                'linear-gradient(135deg, rgba(84, 255, 213, 0.10), rgba(2, 192, 118, 0.04)), var(--surface)',
               borderColor: 'var(--border-color)',
             }}
           >
             <p
-              className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
-              style={{ color: 'var(--accent-cyan)' }}
+              className="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em]"
+              style={{ color: 'var(--accent-mint)' }}
             >
+              <span className="status-dot" />
               Utilities
             </p>
             <h1
@@ -63,13 +65,19 @@ const ToolsPage = () => {
             >
               工具總覽
             </h1>
-            <p 
+            <p
               className="mx-auto mt-4 max-w-2xl text-base leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
+              style={{ color: 'var(--text-secondary)' }}
             >
               實用工具集合，協助快速處理日常網路、安全與資料檢查需求。
             </p>
           </div>
+
+          <AdSlot
+            size="leaderboard"
+            className="mb-10"
+            placement="Tools top leaderboard"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {tools.map((tool) => (
@@ -90,32 +98,35 @@ const ToolsPage = () => {
           </div>
 
           <div className="mt-16 text-center">
-            <div 
+            <div
               className="inline-block max-w-2xl rounded-lg border border-dashed p-6"
-              style={{ 
-                borderColor: "var(--border-color)",
-                backgroundColor: "var(--card-background)"
+              style={{
+                borderColor: 'var(--border-color)',
+                backgroundColor: 'var(--card-background)',
               }}
             >
-              <h3 
+              <h3
                 className="text-lg font-semibold mb-2"
-                style={{ color: "var(--text-primary)" }}
+                style={{ color: 'var(--text-primary)' }}
               >
                 更多工具即將推出
               </h3>
-              <p 
+              <p
                 className="text-sm"
-                style={{ color: "var(--text-muted)" }}
+                style={{ color: 'var(--text-muted)' }}
               >
                 我們正在開發更多實用工具，敬請期待！如果您有任何建議或需求，歡迎與我們聯繫。
               </p>
             </div>
           </div>
-          <AdSlot className="mt-10" placement="Tools page footer banner" />
+          <AdSlot
+            size="large-banner"
+            className="mt-10"
+            placement="Tools page footer banner"
+          />
         </div>
       </div>
 
-      {/* CSS 動畫 */}
       <style jsx>{`
         @keyframes shimmer {
           0% { background-position: -200% 0; }

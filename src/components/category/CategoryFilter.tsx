@@ -15,7 +15,7 @@ export default function CategoryFilter({
     <div
       className="mb-8 flex flex-wrap gap-2 rounded-lg border p-2"
       style={{
-        backgroundColor: 'rgba(16, 27, 30, 0.68)',
+        backgroundColor: 'rgba(20, 24, 29, 0.68)',
         borderColor: 'var(--border-color)',
       }}
     >
