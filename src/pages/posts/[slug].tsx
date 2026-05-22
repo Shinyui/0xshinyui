@@ -73,17 +73,49 @@ export default function Post({
         dateModified={post.date}
         author="0xShinyui"
         image={post.coverImage || undefined}
+        articleSection={getCategoryDisplayName(post.contentType)}
+        keywords={[getCategoryDisplayName(post.contentType)]}
+        inLanguage={siteConfig.locale}
       />
       <BreadcrumbJsonLd
         items={[
           { name: '首頁', url: siteConfig.siteUrl },
           {
-            name: post.contentType,
+            name: getCategoryDisplayName(post.contentType),
             url: `${siteConfig.siteUrl}/category/${encodeURIComponent(post.contentType)}`,
           },
           { name: post.title, url: postUrl },
         ]}
       />
+
+      {/* 視覺化麵包屑（對應 BreadcrumbJsonLd） */}
+      <nav
+        aria-label="Breadcrumb"
+        className="mb-4 flex items-center gap-2 text-xs"
+        style={{ color: 'var(--text-muted)' }}
+      >
+        <Link
+          href="/"
+          className="transition-colors hover:text-[var(--accent-mint)]"
+        >
+          首頁
+        </Link>
+        <span aria-hidden="true">/</span>
+        <Link
+          href={`/category/${encodeURIComponent(post.contentType)}`}
+          className="transition-colors hover:text-[var(--accent-mint)]"
+        >
+          {getCategoryDisplayName(post.contentType)}
+        </Link>
+        <span aria-hidden="true">/</span>
+        <span
+          aria-current="page"
+          className="truncate"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          {post.title}
+        </span>
+      </nav>
 
       {/* 封面 + 基本資料 */}
       <div className="mx-auto mb-10">

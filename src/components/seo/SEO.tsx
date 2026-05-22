@@ -27,6 +27,7 @@ export default function SEO({
   const fullUrl = canonical
     ? `${siteConfig.siteUrl}${canonical}`
     : siteConfig.siteUrl;
+  const usingDefaultImage = !ogImage;
   const imageUrl = ogImage
     ? ogImage
     : `${siteConfig.siteUrl}${siteConfig.defaultOgImage}`;
@@ -46,6 +47,14 @@ export default function SEO({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={pageTitle} />
+      {usingDefaultImage && (
+        <>
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:type" content="image/png" />
+        </>
+      )}
       <meta property="og:locale" content={siteConfig.locale} />
       <meta property="og:site_name" content={siteConfig.siteName} />
       <meta
@@ -72,8 +81,12 @@ export default function SEO({
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={pageTitle} />
       {siteConfig.twitterHandle && (
-        <meta name="twitter:site" content={siteConfig.twitterHandle} />
+        <>
+          <meta name="twitter:site" content={siteConfig.twitterHandle} />
+          <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+        </>
       )}
     </Head>
   );

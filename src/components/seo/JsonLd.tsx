@@ -14,14 +14,7 @@ export function WebSiteJsonLd({
     '@type': 'WebSite',
     name,
     url,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${url}/search?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
+    inLanguage: siteConfig.locale,
   };
 
   return (
@@ -40,6 +33,9 @@ interface ArticleJsonLdProps {
   dateModified?: string;
   author?: string;
   image?: string;
+  articleSection?: string;
+  keywords?: string[];
+  inLanguage?: string;
 }
 
 export function ArticleJsonLd({
@@ -50,7 +46,11 @@ export function ArticleJsonLd({
   dateModified,
   author = siteConfig.author,
   image,
+  articleSection,
+  keywords,
+  inLanguage = siteConfig.locale,
 }: ArticleJsonLdProps) {
+  const logoUrl = `${siteConfig.siteUrl}/logo.png`;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -59,20 +59,30 @@ export function ArticleJsonLd({
     url,
     datePublished,
     dateModified: dateModified || datePublished,
+    inLanguage,
     author: {
       '@type': 'Person',
       name: author,
+      url: siteConfig.siteUrl,
     },
     publisher: {
       '@type': 'Organization',
       name: siteConfig.siteName,
       url: siteConfig.siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: logoUrl,
+        width: 512,
+        height: 512,
+      },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': url,
     },
-    ...(image && { image }),
+    ...(image && { image: [image] }),
+    ...(articleSection && { articleSection }),
+    ...(keywords && keywords.length > 0 && { keywords: keywords.join(', ') }),
   };
 
   return (
