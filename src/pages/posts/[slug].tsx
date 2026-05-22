@@ -19,14 +19,12 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 
 type TocItem = { slug: string; content: string; lvl: number };
 
-type RelatedPost = {
+type SidebarPost = {
   title: string;
   slug: string;
   date: string;
   contentType: string;
 };
-
-type SidebarPost = RelatedPost;
 
 type PostProps = {
   post: {
@@ -39,7 +37,6 @@ type PostProps = {
     toc: TocItem[];
     coverImage: string | null;
   };
-  relatedPosts: RelatedPost[];
   latestPosts: SidebarPost[];
   sidebarCategories: string[];
 };
@@ -48,7 +45,6 @@ const mdxComponents = getMDXComponents();
 
 export default function Post({
   post,
-  relatedPosts,
   latestPosts,
   sidebarCategories,
 }: PostProps) {
@@ -277,18 +273,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const tocData = toc(postData.content).json as TocItem[];
 
     const allPosts = await getAllPosts();
-    const relatedPosts = allPosts
-      .filter(
-        (p) => p.contentType === postData.contentType && p.slug !== slug
-      )
-      .slice(0, 3)
-      .map((p) => ({
-        title: p.title,
-        slug: p.slug,
-        date: p.date,
-        contentType: p.contentType,
-      }));
-
     const latestPosts = allPosts
       .filter((p) => p.slug !== slug)
       .slice(0, 5)
@@ -315,7 +299,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           coverImage: postData.coverImage,
           toc: tocData,
         },
-        relatedPosts,
         latestPosts,
         sidebarCategories,
       },

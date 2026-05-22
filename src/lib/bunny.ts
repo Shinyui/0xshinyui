@@ -24,6 +24,10 @@ export type BunnyImageOptions = {
  * 6. Format and quality
  */
 export function bunnyOptimize(src: string, options: BunnyImageOptions = {}): string {
+  if (!src.startsWith('http://') && !src.startsWith('https://')) {
+    return src;
+  }
+
   const url = new URL(src);
 
   if (options.crop) url.searchParams.set('crop', options.crop);

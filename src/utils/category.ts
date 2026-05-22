@@ -10,6 +10,7 @@ const CATEGORY_MAP: Record<string, string> = {
   dev: "技術",
   edtech: "線上教育",
   iGaming: "博弈產業",
+  adult: "成人產業",
   trading: "交易",
   other: "其他",
 };

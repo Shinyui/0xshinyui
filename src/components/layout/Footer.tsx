@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getCategoryDisplayName } from '@/utils/category';
 
-const FOOTER_CATEGORIES = ['pm', 'dev', 'opt', 'trading', 'iGaming'];
+const FOOTER_CATEGORIES = ['pm', 'dev', 'opt', 'trading', 'iGaming', 'adult'];
 
 const TOOL_LINKS = [
   { label: '工具總覽', href: '/tools' },
